@@ -3,13 +3,21 @@ import Banner from "../../_components/banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import GridItem from "./_components/grid-item";
+import { db } from "@/lib/db";
 
-const InformasiPage = ({
+const InformasiPage = async ({
   searchParams,
 }: {
   searchParams: { type: string };
 }) => {
-  const tabs = ["semua", "berita", "pengumuman", "artikel"];
+  const categories = await db.category.findMany();
+  const tabs = [
+    { label: "Semua", slug: "semua" },
+    ...categories.map((category) => ({
+      label: category.name,
+      slug: category.slug,
+    })),
+  ];
 
   return (
     <div>
@@ -20,11 +28,11 @@ const InformasiPage = ({
         {/* navigation */}
         <div className="flex gap-4 flex-wrap" data-aos="fade">
           {tabs.map((tab) => (
-            <Link key={tab} href={`/informasi?type=${tab}`}>
+            <Link key={tab.slug} href={`/informasi?type=${tab.slug}`}>
               <Button
-                variant={tab === searchParams.type ? "default" : "outline"}
+                variant={tab.slug === searchParams.type ? "default" : "outline"}
               >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                {tab.label}
               </Button>
             </Link>
           ))}

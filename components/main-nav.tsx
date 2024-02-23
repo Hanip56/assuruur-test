@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import NavItem from "./nav-item";
+import { Category } from "@prisma/client";
 
 type Route = {
   label: string;
@@ -21,7 +22,11 @@ type Route = {
   }[];
 };
 
-const MainNav = () => {
+type Props = {
+  categories: Category[];
+};
+
+const MainNav = ({ categories }: Props) => {
   const routes: Route[] = [
     {
       label: "Beranda",
@@ -71,20 +76,10 @@ const MainNav = () => {
     },
     {
       label: "Informasi",
-      sub: [
-        {
-          label: "Berita",
-          href: "/informasi?type=berita",
-        },
-        {
-          label: "Artikel",
-          href: "/informasi?type=artikel",
-        },
-        {
-          label: "Pengumuman",
-          href: "/informasi?type=pengumuman",
-        },
-      ],
+      sub: categories?.map((category) => ({
+        label: category.name,
+        href: `/informasi?type=${category.slug}`,
+      })),
     },
     {
       label: "Pendaftaran",
@@ -101,7 +96,7 @@ const MainNav = () => {
       <NavigationMenuList>
         {routes.map((route) =>
           route.href ? (
-            <NavigationMenuItem key={route.href}>
+            <NavigationMenuItem key={route.label}>
               <Link href={route.href} legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {route.label}
@@ -109,7 +104,7 @@ const MainNav = () => {
               </Link>
             </NavigationMenuItem>
           ) : (
-            <NavigationMenuItem key={route.href}>
+            <NavigationMenuItem key={route.label}>
               <NavigationMenuTrigger>{route.label}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">

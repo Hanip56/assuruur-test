@@ -81,22 +81,34 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
   const onSubmit = async (values: z.infer<typeof articleSchema>) => {
     try {
       setIsLoading(true);
+      let image;
 
-      // upload image
-      const compressedImg = await compressImage(values.image);
-      const imgRes = await startUpload([compressedImg]);
+      if (!!(values.image instanceof File)) {
+        // upload image
+        const compressedImg = await compressImage(values.image);
+        const imgRes = await startUpload([compressedImg]);
 
-      // save to database
-      if (imgRes && imgRes.length > 0) {
+        image = imgRes?.[0].key;
+      }
+
+      if (initialData) {
+        // update
+        await axios.patch(`/api/articles/${initialData.id}`, {
+          ...values,
+          image,
+        });
+      } else {
+        // create new
         await axios.post("/api/articles", {
           ...values,
-          image: imgRes[0].key,
+          image,
         });
-        toast.success("Informasi created");
-        router.push("../informasi");
-        router.refresh();
-        form.reset();
       }
+
+      toast.success(initialData ? "Informasi updated" : "Informasi created");
+      router.push("../informasi");
+      router.refresh();
+      form.reset();
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong");

@@ -24,7 +24,6 @@ const DetailArticlePage = async ({
       },
     });
 
-    console.log(article);
   }
   return (
     <Container>

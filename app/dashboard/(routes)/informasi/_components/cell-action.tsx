@@ -27,14 +27,14 @@ const CellAction = ({ data }: CellActionProps) => {
 
   const handleCopy = () => {
     navigator.clipboard.writeText(data.id);
-    toast.success("Article ID copied to clipboard.");
+    toast.success("Informasi ID copied to clipboard.");
   };
 
   const handleDelete = async () => {
     try {
       setIsLoading(true);
       await axios.delete(`/api/articles/${data.id}`);
-      toast.success(`Article with id ${data.id} has been deleted.`);
+      toast.success(`Informasi with id ${data.id} has been deleted.`);
       router.refresh();
     } catch (error) {
       toast.error("Something went wrong");

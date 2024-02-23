@@ -37,7 +37,7 @@ const CellAction = ({ data }: CellActionProps) => {
       toast.success(`Tag with id ${data.id} has been deleted.`);
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Make sure you are deleted informasi using this tag");
     } finally {
       setIsLoading(false);
       setOpen(false);
