@@ -26,6 +26,7 @@
     "@tiptap/react": "^2.2.3",
     "@tiptap/starter-kit": "^2.2.3",
     "@types/aos": "^3.0.7",
+    "@uploadthing/react": "^6.2.4",
     "aos": "^2.3.4",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
@@ -44,6 +45,7 @@
     "slugify": "^1.6.6",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "uploadthing": "^6.4.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {

@@ -8,20 +8,24 @@ import { isObjectId } from "@/lib/utils";
 const DetailArticlePage = async ({
   params,
 }: {
-  params: { articleId: string };
+  params: { informasiId: string };
 }) => {
   let article;
   const categories = await db.category.findMany({});
   const tags = await db.tag.findMany({});
 
-  if (isObjectId(params.articleId)) {
+  if (isObjectId(params.informasiId)) {
     article = await db.article.findUnique({
       where: {
-        id: params.articleId,
+        id: params.informasiId,
+      },
+      include: {
+        tags: true,
       },
     });
-  }
 
+    console.log(article);
+  }
   return (
     <Container>
       <Heading

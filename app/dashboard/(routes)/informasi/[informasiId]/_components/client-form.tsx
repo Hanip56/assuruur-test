@@ -21,39 +21,54 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { BASE_IMAGE_URL } from "@/constants";
+import { useUploadThing } from "@/lib/upload-thing";
+import { compressImage } from "@/lib/utils";
 import { articleSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Article, Category, Tag } from "@prisma/client";
+import { Article, Category, Tag, TagsOnArticles } from "@prisma/client";
+import axios from "axios";
 import { Trash } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as z from "zod";
 
+type ArticleWithTags = Article & { tags: TagsOnArticles[] };
+
 type Props = {
-  initialData?: Article | null;
+  initialData?: ArticleWithTags | null;
   categories?: Category[] | null;
   tags?: Tag[] | null;
 };
 
 const ClientForm = ({ initialData, categories, tags }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { startUpload } = useUploadThing("imageUploader");
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof articleSchema>>({
     resolver: zodResolver(articleSchema),
-    defaultValues: initialData ?? {
-      category: "",
-      content: "",
-      image: "",
-      tags: [],
-      title: "",
-    },
+    defaultValues: initialData
+      ? {
+          ...initialData,
+          category: initialData?.categoryId,
+          tags: initialData?.tags.map((tag) => tag.tagId),
+        }
+      : {
+          category: "",
+          content: "",
+          image: "",
+          tags: [],
+          title: "",
+        },
   });
 
   const imageState = form.watch("image");
   const tagsState = form.watch("tags");
 
-  const tagsSelectValue = tagsState.map((tagId) => {
+  const tagsSelectValue = tagsState?.map((tagId) => {
     const index = tags?.findIndex((t) => t.id === tagId);
     if (index === undefined || index < 0 || !tags) return;
 
@@ -64,7 +79,30 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof articleSchema>) => {
-    console.log(values);
+    try {
+      setIsLoading(true);
+
+      // upload image
+      const compressedImg = await compressImage(values.image);
+      const imgRes = await startUpload([compressedImg]);
+
+      // save to database
+      if (imgRes && imgRes.length > 0) {
+        await axios.post("/api/articles", {
+          ...values,
+          image: imgRes[0].key,
+        });
+        toast.success("Informasi created");
+        router.push("../informasi");
+        router.refresh();
+        form.reset();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -78,7 +116,11 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Enter title" />
+                  <Input
+                    {...field}
+                    placeholder="Enter title"
+                    disabled={isLoading}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -93,7 +135,11 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      disabled={isLoading}
+                    >
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Category" />
                       </SelectTrigger>
@@ -128,6 +174,7 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
                         value: tag.id,
                         label: tag.name,
                       }))}
+                      isDisabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />
@@ -162,7 +209,7 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
                     <Image
                       src={
                         !(imageState instanceof File)
-                          ? `${BASE_IMAGE_URL}/${imageState.url}`
+                          ? `${BASE_IMAGE_URL}/${imageState}`
                           : URL.createObjectURL(imageState)
                       }
                       alt="Preview-image"
@@ -195,7 +242,7 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
             )}
           />
           <div className="flex">
-            <Button className="ml-auto">
+            <Button className="ml-auto" disabled={isLoading}>
               {initialData ? "Update" : "Create"}
             </Button>
           </div>

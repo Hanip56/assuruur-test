@@ -64,7 +64,7 @@ const CellAction = ({ data }: CellActionProps) => {
           <DropdownMenuItem onClick={handleCopy}>
             <Copy className="mr-2 w-4 h-4" /> Copy Id
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`articles/${data.id}`)}>
+          <DropdownMenuItem onClick={() => router.push(`informasi/${data.id}`)}>
             <Edit className="mr-2 w-4 h-4" /> Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
