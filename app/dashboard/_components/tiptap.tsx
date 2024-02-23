@@ -3,7 +3,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Toolbar } from "./tiptap-toolbar";
-import HardBreak from "@tiptap/extension-hard-break";
+// import HardBreak from "@tiptap/extension-hard-break";
 // import ImageTiptap from "./ImageTiptap";
 import ImageTiptap from "@tiptap/extension-image";
 import { Node } from "@tiptap/core";
@@ -44,7 +44,6 @@ const Tiptap = ({ description, onChange }: Props) => {
     content: description,
     onUpdate({ editor }) {
       onChange(editor.getHTML());
-      console.log(editor.getHTML());
     },
   });
 

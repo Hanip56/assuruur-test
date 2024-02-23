@@ -42,7 +42,7 @@ const HomeClient = () => {
         </div>
       </section>
 
-      <Section title="Latest News">
+      <Section title="Info Terbaru">
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             <div className="w-full h-60 sm:h-80 bg-black md:col-span-2" />

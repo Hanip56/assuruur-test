@@ -7,6 +7,8 @@ import {
   PictureInPicture,
   TagIcon,
   ActivityIcon,
+  TicketMinus,
+  InfoIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -20,6 +22,24 @@ const MainNav = () => {
       path: "/dashboard",
       icon: <LayoutDashboard />,
       active: pathname === "/dashboard",
+    },
+    {
+      label: "Tags",
+      path: "/dashboard/tags",
+      icon: <TagIcon />,
+      active: pathname === "/dashboard/tags",
+    },
+    {
+      label: "Category",
+      path: "/dashboard/categories",
+      icon: <TicketMinus />,
+      active: pathname === "/dashboard/categories",
+    },
+    {
+      label: "Informasi",
+      path: "/dashboard/informasi",
+      icon: <InfoIcon />,
+      active: pathname === "/dashboard/informasi",
     },
   ];
 

@@ -16,8 +16,8 @@ export default async function DashboardLayout({
     >
       <div className="flex">
         <Topbar />
-        <div className="hidden h-screen md:block w-60 border-r flex-shrink-0">
-          <div className="fixed h-full w-60">
+        <div className="hidden h-screen md:block w-60 flex-shrink-0">
+          <div className="fixed h-full w-60 border-r">
             <Sidebar />
           </div>
         </div>
