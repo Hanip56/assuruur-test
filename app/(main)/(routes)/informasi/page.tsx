@@ -11,6 +11,21 @@ const InformasiPage = async ({
   searchParams: { type: string };
 }) => {
   const categories = await db.category.findMany();
+  const currentCategory = searchParams.type;
+
+  const currentCategoryIndex = categories.findIndex(
+    (c) => c.slug === currentCategory
+  );
+
+  const articles = await db.article.findMany({
+    where: {
+      categoryId:
+        currentCategoryIndex < 0
+          ? undefined
+          : categories[currentCategoryIndex].id,
+    },
+  });
+
   const tabs = [
     { label: "Semua", slug: "semua" },
     ...categories.map((category) => ({
@@ -30,7 +45,7 @@ const InformasiPage = async ({
           {tabs.map((tab) => (
             <Link key={tab.slug} href={`/informasi?type=${tab.slug}`}>
               <Button
-                variant={tab.slug === searchParams.type ? "default" : "outline"}
+                variant={tab.slug === currentCategory ? "default" : "outline"}
               >
                 {tab.label}
               </Button>
@@ -43,11 +58,9 @@ const InformasiPage = async ({
           data-aos="fade"
           className="my-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 gap-y-8 sm:gap-4 md:gap-8"
         >
-          {Array(9)
-            .fill("")
-            .map((_, i) => (
-              <GridItem key={i} />
-            ))}
+          {articles?.map((article, i) => (
+            <GridItem key={i} article={article} />
+          ))}
         </div>
       </div>
     </div>

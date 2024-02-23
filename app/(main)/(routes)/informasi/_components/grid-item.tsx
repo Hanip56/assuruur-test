@@ -1,14 +1,20 @@
+import { BASE_IMAGE_URL } from "@/constants";
+import { Article } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const GridItem = () => {
+type Props = {
+  article: Article;
+};
+
+const GridItem = ({ article: { title, image, slug } }: Props) => {
   return (
-    <Link href="/informasi/slug">
+    <Link href={`/informasi/${slug}`}>
       <div className="w-full flex flex-col gap-3 group hover:opacity-75 transition">
         <div className="h-72 w-full overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={`${BASE_IMAGE_URL}/${image}`}
             alt=""
             className="w-full h-full object-cover transition group-hover:scale-110 duration-500"
             width={500}
@@ -17,7 +23,7 @@ const GridItem = () => {
         </div>
         <div>
           <h5 className="text-lg sm:text-xl font-semibold">
-            Ujian Tulis KMI: Pentingnya Kecerdasan Naluri dan Nurani
+            {title.length > 50 ? title.slice(0, 50) + "..." : title}
           </h5>
           <small>25 Februari 2024</small>
         </div>
