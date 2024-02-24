@@ -24,9 +24,14 @@ type Route = {
 
 type Props = {
   categories: Category[];
+  lembagas: {
+    id: string;
+    name: string;
+    slug: string;
+  }[];
 };
 
-const MainNav = ({ categories }: Props) => {
+const MainNav = ({ categories, lembagas }: Props) => {
   const routes: Route[] = [
     {
       label: "Beranda",
@@ -55,24 +60,10 @@ const MainNav = ({ categories }: Props) => {
     },
     {
       label: "Lembaga",
-      sub: [
-        {
-          label: "KULLYATUL MU’ALII,IIM AL-ISLAMIYYAH",
-          href: "/lembaga/kulliyatul-mualiiiim-al-islamiyah",
-        },
-        {
-          label: "MADRASAH ALIYAH",
-          href: "/lembaga/madrasah-aliyah",
-        },
-        {
-          label: "MADRASAH TSANAWIYAH",
-          href: "/lembaga/madrasah-tsanawiyah",
-        },
-        {
-          label: "MADRASAH Ibtidaiyah",
-          href: "/lembaga/madrasah-ibtidaiyah",
-        },
-      ],
+      sub: lembagas.map((lembaga) => ({
+        label: lembaga.name,
+        href: `/lembaga/${lembaga.slug}`,
+      })),
     },
     {
       label: "Informasi",

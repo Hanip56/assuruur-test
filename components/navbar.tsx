@@ -7,6 +7,18 @@ import { db } from "@/lib/db";
 
 const Navbar = async () => {
   const categories = await db.category.findMany();
+  const lembagas = await db.lembaga.findMany({
+    where: {
+      NOT: {
+        id: "65d94f564a122b6a6b0b8337",
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+    },
+  });
 
   return (
     <div className="z-50 fixed w-[100%] top-0 bg-white shadow-sm">
@@ -22,7 +34,7 @@ const Navbar = async () => {
             />
           </div>
         </div>
-        <MainNav categories={categories} />
+        <MainNav categories={categories} lembagas={lembagas} />
         <Button size="icon" variant="ghost" className="rounded-full">
           <SearchIcon className="w-4 h-4" />
         </Button>

@@ -50,6 +50,7 @@ export const lembagaSchema = z.object({
   name: z.string().min(1, "Name is required"),
   profile: z.string().min(1, "Profile is requrired"),
   visi: z.string().min(1, "Visi is requrired"),
+  moreInfo: z.string().optional(),
   image: z
     .any()
     .refine((file) => file, "Image is required")

@@ -36,6 +36,8 @@ const DetailLembagaPage = async ({
     });
   }
 
+  if (!lembaga) return redirect("../lembaga");
+
   return (
     <Container>
       <Heading

@@ -94,10 +94,10 @@ model Lembaga {
   slug      String
   profile   String
   visi      String
+  moreInfo  String?
   image     String?
   pimpinan  Pimpinan[]
   misi      Misi[]
-  MoreInfo  MoreInfo[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 }
@@ -122,12 +122,12 @@ model Misi {
   updatedAt DateTime @updatedAt
 }
 
-model MoreInfo {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  content   String
-  image     String
-  lembagaId String   @db.ObjectId
-  Lembaga   Lembaga  @relation(fields: [lembagaId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
+// model MoreInfo {
+//   id        String   @id @default(auto()) @map("_id") @db.ObjectId
+//   content   String
+//   image     String
+//   lembagaId String   @db.ObjectId
+//   Lembaga   Lembaga  @relation(fields: [lembagaId], references: [id], onDelete: Cascade)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }

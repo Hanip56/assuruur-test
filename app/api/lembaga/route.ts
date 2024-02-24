@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { name, profile, visi, image } = await req.json();
+    const { name, profile, visi, image, moreInfo } = await req.json();
 
     if (!image || !name || !profile || !visi) {
       return new NextResponse("Required field is missing", { status: 400 });
@@ -25,6 +25,7 @@ export async function POST(req: Request) {
         data: {
           name,
           profile,
+          moreInfo,
           image,
           slug: slugify(name),
           visi,

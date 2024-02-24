@@ -38,6 +38,7 @@ export async function PATCH(
         name: body?.name,
         slug: body.name ? slugify(body.name) : undefined,
         profile: body?.profile,
+        moreInfo: body?.moreInfo,
         visi: body?.visi,
         image: body?.image,
       },

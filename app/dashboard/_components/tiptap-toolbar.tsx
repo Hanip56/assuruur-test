@@ -2,7 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { TextAlignCenterIcon, TextAlignLeftIcon } from "@radix-ui/react-icons";
+import {
+  TextAlignCenterIcon,
+  TextAlignLeftIcon,
+  TextAlignRightIcon,
+} from "@radix-ui/react-icons";
 import { type Editor } from "@tiptap/react";
 import {
   Bold,
@@ -29,6 +33,15 @@ export function Toolbar({ editor }: Props) {
 
   return (
     <div className="border border-input bg-transparent rounded-md p-2 flex flex-wrap gap-1">
+      <Toggle
+        size="sm"
+        pressed={editor.isActive("heading", { level: 1 })}
+        onPressedChange={() =>
+          editor.chain().focus().toggleHeading({ level: 1 }).run()
+        }
+      >
+        <Heading1 className="w-4 h-4" />
+      </Toggle>
       <Toggle
         size="sm"
         pressed={editor.isActive("heading", { level: 2 })}
@@ -141,7 +154,7 @@ export function Toolbar({ editor }: Props) {
           editor.chain().focus().setTextAlign("right").run()
         }
       >
-        <TextAlignCenterIcon className="w-4 h-4" />
+        <TextAlignRightIcon className="w-4 h-4" />
       </Toggle>
       <Button
         type="button"

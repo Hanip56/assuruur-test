@@ -15,7 +15,7 @@ type Props = {
   profil: LembagaWithRelation | null;
 };
 
-const ProfilClient = ({ profil }: Props) => {
+const ClientComp = ({ profil }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const ProfilClient = ({ profil }: Props) => {
   if (!isMounted) return null;
 
   return (
-    <div className="w-[100%]">
+    <div className="w-[100%] overflow-x-hidden">
       {/* main */}
       <div className="my-20">
         {/* pendiri dan wakif */}
@@ -67,7 +67,7 @@ const ProfilClient = ({ profil }: Props) => {
         {/* visi misi */}
         <section className="py-20 bg-black text-white my-20 space-y-20">
           {/* Visi */}
-          <div className="max-w-7xl mx-auto px-2 sm:px-4" data-aos="fade-up">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4" data-aos="fade">
             {/* heading */}
             <div className="mb-6">
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-normal sm:leading-normal md:leading-normal lg:leading-normal text-center">
@@ -81,7 +81,7 @@ const ProfilClient = ({ profil }: Props) => {
             </div>
           </div>
           {/* Misi */}
-          <div className="max-w-7xl mx-auto px-2 sm:px-4" data-aos="fade-up">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4" data-aos="fade">
             {/* heading */}
             <div className="mb-6">
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-normal sm:leading-normal md:leading-normal lg:leading-normal text-center">
@@ -120,59 +120,9 @@ const ProfilClient = ({ profil }: Props) => {
             <TiptapContent content={profil.moreInfo} />
           </Section>
         )}
-
-        {/* Panca Jiwa pondok */}
-        {/* <section className="max-w-6xl mx-auto px-2 sm:px-4 py-20 flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-16">
-          <div className="flex-1 h-60" data-aos="fade-right">
-            <Image
-              src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-              className="w-full h-full object-cover"
-              width={500}
-              height={500}
-            />
-          </div>
-          <div className="basis-[40%]" data-aos="fade-left">
-            <h3 className="font-bold text-2xl sm:text-3xl mb-6">
-              Panca Jiwa Pondok
-            </h3>
-            <ul>
-              <li>1. Keikhlasan</li>
-              <li>2. Kesederhanaan</li>
-              <li>3. Berdikari</li>
-              <li>4. Ukhuwah Islamiyah</li>
-              <li>5. Kebebasan</li>
-            </ul>
-          </div>
-        </section> */}
-
-        {/* Arah & Tujuan Pendidikan */}
-        {/* <section className="max-w-6xl mx-auto px-2 sm:px-4 py-20 flex flex-col-reverse sm:flex-row sm:items-center gap-6 sm:gap-16">
-          <div className="basis-[40%]" data-aos="fade-right">
-            <h3 className="font-bold text-2xl sm:text-3xl mb-6">
-              Arah & Tujuan Pendidikan
-            </h3>
-            <ul>
-              <li>1. Bertakwa kepada Allah</li>
-              <li>2. Beramal shalih</li>
-              <li>3. Berbudi luhur</li>
-              <li>4. Berbadan sehat</li>
-              <li>5. Berpengetahuan luas</li>
-            </ul>
-          </div>
-          <div className="flex-1 h-60" data-aos="fade-left">
-            <Image
-              src="https://images.unsplash.com/photo-1527192491265-7e15c55b1ed2?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-              className="w-full h-full object-cover"
-              width={500}
-              height={500}
-            />
-          </div>
-        </section> */}
       </div>
     </div>
   );
 };
 
-export default ProfilClient;
+export default ClientComp;

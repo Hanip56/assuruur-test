@@ -2,9 +2,10 @@ import Image from "next/image";
 
 type Props = {
   title: string;
+  image?: string | null;
 };
 
-const Banner = ({ title }: Props) => {
+const Banner = ({ title, image }: Props) => {
   return (
     <section className="relative h-72 sm:h-80 md:h-96 overflow-x-hidden w-[100%]">
       <div className="-z-10 absolute w-full h-full">
@@ -12,6 +13,7 @@ const Banner = ({ title }: Props) => {
 
         <Image
           src={
+            image ??
             "https://plus.unsplash.com/premium_photo-1683880731561-f0cceb0ad405?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
           alt="Hero-image"

@@ -46,11 +46,15 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
 
   const form = useForm<z.infer<typeof lembagaSchema>>({
     resolver: zodResolver(lembagaSchema),
-    defaultValues: initialData ?? {
+    defaultValues: {
+      ...initialData,
+      moreInfo: initialData?.moreInfo ?? "",
+    } ?? {
       name: "",
       visi: "",
       image: "",
       profile: "",
+      moreInfo: "",
     },
   });
 
@@ -153,14 +157,6 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
               {/* header */}
               <div className="px-6 py-4 flex justify-between items-center border-b">
                 <h3 className="text-base md:text-lg font-medium">Pimpinan</h3>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setShowPimpinanModal(true);
-                  }}
-                >
-                  Add
-                </Button>
               </div>
               <div className="px-6 py-4 flex flex-col gap-2">
                 {pimpinans?.map((pimpinan) => (
@@ -219,6 +215,23 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
                   <FormControl>
                     <Tiptap
                       description={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* profile */}
+            <FormField
+              control={form.control}
+              name="moreInfo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>More Info (optional)</FormLabel>
+                  <FormControl>
+                    <Tiptap
+                      description={field.value ?? ""}
                       onChange={field.onChange}
                     />
                   </FormControl>
