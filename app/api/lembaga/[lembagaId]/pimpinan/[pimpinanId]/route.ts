@@ -1,12 +1,11 @@
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { utapi } from "@/lib/upload-thing-server";
-import { slugify } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { lembagaId: string } }
+  { params }: { params: { pimpinanId: string } }
 ) {
   try {
     const session = await auth();
@@ -17,28 +16,26 @@ export async function PATCH(
 
     const body = await req.json();
 
-    const lembagaExist = await db.lembaga.findUnique({
+    const pimpinanExist = await db.pimpinan.findUnique({
       where: {
-        id: params.lembagaId,
+        id: params.pimpinanId,
       },
     });
 
-    if (!lembagaExist) {
-      return new NextResponse("Lembaga not found", { status: 404 });
+    if (!pimpinanExist) {
+      return new NextResponse("Pimpinan not found", { status: 404 });
     }
 
-    const oldImage = lembagaExist.image;
+    const oldImage = pimpinanExist.image;
     const isImageChange = body?.image && oldImage !== body.image;
 
-    await db.lembaga.update({
+    await db.pimpinan.update({
       where: {
-        id: params.lembagaId,
+        id: params.pimpinanId,
       },
       data: {
         name: body?.name,
-        slug: body.name ? slugify(body.name) : undefined,
-        profile: body?.profile,
-        visi: body?.visi,
+        title: body?.title,
         image: body?.image,
       },
     });
@@ -49,7 +46,7 @@ export async function PATCH(
 
     return NextResponse.json("updated");
   } catch (error) {
-    console.log("[LEMBAGA_ID_PATCH]", error);
+    console.log("[PIMPINAN_ID_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
