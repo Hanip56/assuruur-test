@@ -13,7 +13,7 @@ const ProfilClient = () => {
   if (!isMounted) return null;
 
   return (
-    <div>
+    <div className="w-[100%] overflow-x-hidden">
       {/* main */}
       <div className="my-20">
         {/* pendiri dan wakif */}

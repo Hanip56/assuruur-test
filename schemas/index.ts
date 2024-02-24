@@ -1,7 +1,7 @@
 import * as z from "zod";
 
-const MAX_FILE_SIZE = 2 * 1024 * 1024; // 5 mb
-const ACCEPTED_IMAGE_TYPES = [
+export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 5 mb
+export const ACCEPTED_IMAGE_TYPES = [
   "image/jpeg",
   "image/jpg",
   "image/png",
@@ -44,4 +44,22 @@ export const articleSchema = z.object({
     ),
   tags: z.array(z.string()),
   category: z.string().min(1, "Category is required"),
+});
+
+export const lembagaSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  profile: z.string().min(1, "Profile is requrired"),
+  visi: z.string().min(1, "Visi is requrired"),
+  image: z
+    .any()
+    .refine((file) => file, "Image is required")
+    .refine(
+      (file) => !(file instanceof File) || file.size <= MAX_FILE_SIZE,
+      "Max file size is 2mb"
+    )
+    .refine(
+      (file) =>
+        !(file instanceof File) || ACCEPTED_IMAGE_TYPES.includes(file.type),
+      "Only .jpg, .jpeg, .png, and .webp formats are supported."
+    ),
 });

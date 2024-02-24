@@ -87,3 +87,47 @@ model TagsOnArticles {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Lembaga {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  slug      String
+  profile   String
+  visi      String
+  image     String?
+  pimpinan  Pimpinan[]
+  misi      Misi[]
+  MoreInfo  MoreInfo[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Pimpinan {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  title     String
+  image     String
+  lembagaId String   @db.ObjectId
+  Lembaga   Lembaga  @relation(fields: [lembagaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Misi {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  lembagaId String   @db.ObjectId
+  Lembaga   Lembaga  @relation(fields: [lembagaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MoreInfo {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  image     String
+  lembagaId String   @db.ObjectId
+  Lembaga   Lembaga  @relation(fields: [lembagaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -9,6 +9,7 @@ import {
   ActivityIcon,
   TicketMinus,
   InfoIcon,
+  School,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -40,6 +41,12 @@ const MainNav = () => {
       path: "/dashboard/informasi",
       icon: <InfoIcon />,
       active: pathname === "/dashboard/informasi",
+    },
+    {
+      label: "Lembaga",
+      path: "/dashboard/lembaga",
+      icon: <School />,
+      active: pathname === "/dashboard/lembaga",
     },
   ];
 
