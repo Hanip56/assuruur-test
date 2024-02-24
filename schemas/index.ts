@@ -64,3 +64,21 @@ export const lembagaSchema = z.object({
       "Only .jpg, .jpeg, .png, and .webp formats are supported."
     ),
 });
+
+export const fasilitasSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  description: z.string().min(1, "Description is requrired"),
+  type: z.string().min(1, "Type is requrired"),
+  image: z
+    .any()
+    .refine((file) => file, "Image is required")
+    .refine(
+      (file) => !(file instanceof File) || file.size <= MAX_FILE_SIZE,
+      "Max file size is 2mb"
+    )
+    .refine(
+      (file) =>
+        !(file instanceof File) || ACCEPTED_IMAGE_TYPES.includes(file.type),
+      "Only .jpg, .jpeg, .png, and .webp formats are supported."
+    ),
+});

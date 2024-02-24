@@ -10,6 +10,8 @@ import {
   TicketMinus,
   InfoIcon,
   School,
+  Building,
+  Building2,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -47,6 +49,18 @@ const MainNav = () => {
       path: "/dashboard/lembaga",
       icon: <School />,
       active: pathname === "/dashboard/lembaga",
+    },
+    {
+      label: "Fasilitas Type",
+      path: "/dashboard/fasilitas-type",
+      icon: <Building2 />,
+      active: pathname === "/dashboard/fasilitas-type",
+    },
+    {
+      label: "Fasilitas",
+      path: "/dashboard/fasilitas",
+      icon: <Building />,
+      active: pathname === "/dashboard/fasilitas",
     },
   ];
 
