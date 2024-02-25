@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import GridItem from "./_components/grid-item";
 import { db } from "@/lib/db";
+import { contentIds } from "@/constants";
 
 const InformasiPage = async ({
   searchParams,
@@ -19,10 +20,24 @@ const InformasiPage = async ({
 
   const articles = await db.article.findMany({
     where: {
-      categoryId:
-        currentCategoryIndex < 0
-          ? undefined
-          : categories[currentCategoryIndex].id,
+      AND: [
+        {
+          categoryId:
+            currentCategoryIndex < 0
+              ? undefined
+              : categories[currentCategoryIndex].id,
+        },
+        {
+          NOT: [
+            {
+              id: contentIds.pendaftaran,
+            },
+            {
+              id: contentIds.sejarah,
+            },
+          ],
+        },
+      ],
     },
   });
 
