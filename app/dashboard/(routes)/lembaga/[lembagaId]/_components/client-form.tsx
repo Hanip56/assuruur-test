@@ -87,7 +87,7 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
         });
       }
 
-      toast.success(initialData ? "Informasi updated" : "Informasi created");
+      toast.success(initialData ? "Lembaga updated" : "Lembaga created");
       router.push("../lembaga");
       router.refresh();
       form.reset();

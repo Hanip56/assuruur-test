@@ -82,3 +82,20 @@ export const fasilitasSchema = z.object({
       "Only .jpg, .jpeg, .png, and .webp formats are supported."
     ),
 });
+
+export const fotoSchema = z.object({
+  alt: z.string().optional(),
+  description: z.string().min(1, "Description is required"),
+  image: z
+    .any()
+    .refine((file) => file, "Image is required")
+    .refine(
+      (file) => !(file instanceof File) || file.size <= MAX_FILE_SIZE,
+      "Max file size is 2mb"
+    )
+    .refine(
+      (file) =>
+        !(file instanceof File) || ACCEPTED_IMAGE_TYPES.includes(file.type),
+      "Only .jpg, .jpeg, .png, and .webp formats are supported."
+    ),
+});

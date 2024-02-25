@@ -9,8 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.3.42",
-    "@googlemaps/js-api-loader": "^1.16.6",
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.10.2",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -50,6 +48,7 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.4.1",
+    "yet-another-react-lightbox": "^3.17.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
