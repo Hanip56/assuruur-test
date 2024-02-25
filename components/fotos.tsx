@@ -1,39 +1,51 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import ImagePicker from "./image-picker";
-import { getImageSize } from "@/lib/utils";
+import { BASE_IMAGE_URL } from "@/constants";
+import { Foto } from "@prisma/client";
+import "photoswipe/dist/photoswipe.css";
 
-const Fotos = () => {
-  const [open, setOpen] = useState(false);
-  const [file, setFile] = useState<File>();
+import { Gallery, Item } from "react-photoswipe-gallery";
 
-  useEffect(() => {
-    getImageSize(
-      "https://utfs.io/f/fabf1d65-d443-4702-a005-d5a1711a6114-jlkjti.jpg"
-    ).then((e) => console.log(e));
-  }, []);
-
-  console.log({ file });
-
-  // const galleries = [
-  //   {
-  //     url: "https://utfs.io/f/fabf1d65-d443-4702-a005-d5a1711a6114-jlkjti.jpg",
-  //   },
-  //   {
-  //     url: "https://utfs.io/f/641fbe2d-668b-4d92-80d6-c22b720be0e2-hc4tul.jpg",
-  //   },
-  //   {
-  //     url: "https://utfs.io/f/76efc71b-64df-45af-82da-ece8b70095fa-kvu00e.jpg",
-  //   },
-  // ];
-
-  return (
-    <ImagePicker
-      onChange={(e) => e instanceof File && setFile(e)}
-      isEmpty={false}
-    />
-  );
+type Props = {
+  fotos: Foto[];
 };
+
+const Fotos = ({ fotos }: Props) => (
+  <Gallery>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+      {fotos?.map((foto) => (
+        <div
+          key={foto.id}
+          className="w-full pb-[100%] relative overflow-hidden cursor-pointer group"
+        >
+          <Item
+            original={`${BASE_IMAGE_URL}/${foto.image}`}
+            width={foto.width}
+            height={foto.height}
+          >
+            {({ ref, open }) => (
+              <div
+                className="absolute top-0 left-0 w-full h-full group"
+                onClick={open}
+              >
+                {/* overlay */}
+                <div className="absolute top-0 left-0 inset-0 bg-gradient-to-b from-transparent to-black z-10 opacity-0 transition group-hover:opacity-70" />
+                <p className="text-sm absolute bottom-0 left-0 p-[10%] z-20 opacity-0 group-hover:opacity-100 text-white transition">
+                  {foto.description}
+                </p>
+                <img
+                  ref={ref}
+                  src={`${BASE_IMAGE_URL}/${foto.image}`}
+                  alt=""
+                  className="absolute top-0 left-0 w-full h-full object-cover"
+                />
+              </div>
+            )}
+          </Item>
+        </div>
+      ))}
+    </div>
+  </Gallery>
+);
 
 export default Fotos;
