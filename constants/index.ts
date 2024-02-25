@@ -5,3 +5,10 @@ export const contentIds = {
   sejarah: "65da9905c5edb294112441b5", // informasi model
   pendaftaran: "65dae8a7f6fcdbdb89c9eecd", // informasi model
 };
+
+export const baseInfo = {
+  alamat:
+    "Jl.Sindangreret No.72 Ds.Sukasari Kec. Pameungpeuk Kab. Bandung 40376",
+  telepon: "(022) 8593 0310 / 0813 2261 0259",
+  email: "ponpesassuruur@gmail.com",
+};
