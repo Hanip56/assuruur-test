@@ -11,4 +11,9 @@ export const baseInfo = {
     "Jl.Sindangreret No.72 Ds.Sukasari Kec. Pameungpeuk Kab. Bandung 40376",
   telepon: "(022) 8593 0310 / 0813 2261 0259",
   email: "ponpesassuruur@gmail.com",
+  instagram: "https://www.instagram.com/assuruur_ponpes",
+  youtube: "https://www.youtube.com/c/AssuruurChannel",
+  tiktok: "https://www.tiktok.com/@assuruur_ponpes",
+  facebook: "https://www.facebook.com/assuruurponpes/",
+  description: "Pondok Pesantren Assuruur",
 };

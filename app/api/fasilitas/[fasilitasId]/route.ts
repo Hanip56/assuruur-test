@@ -40,6 +40,8 @@ export async function PATCH(
         fasilitasTypeId: body?.type,
         slug: body.name ? slugify(body.name) : undefined,
         image: body?.image,
+        width: body?.width,
+        height: body?.height,
       },
     });
 

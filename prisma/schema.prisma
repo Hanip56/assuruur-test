@@ -135,6 +135,8 @@ model Fasilitas {
   slug            String
   description     String
   image           String
+  width           Int
+  height          Int
   fasilitasTypeId String        @db.ObjectId
   type            FasilitasType @relation(fields: [fasilitasTypeId], references: [id])
   createdAt       DateTime      @default(now())

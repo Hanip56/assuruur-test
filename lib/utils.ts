@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import imageCompression from "browser-image-compression";
 import slug from "slugify";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -58,4 +59,8 @@ export function getImageSize(
   img.src = url;
 
   return promise;
+}
+
+export function getDate(date: string) {
+  return format(new Date(2014, 1, 11), "yyyy-mm-dd");
 }

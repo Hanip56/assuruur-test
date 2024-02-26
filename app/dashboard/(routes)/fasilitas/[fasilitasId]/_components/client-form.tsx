@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage } from "@/lib/utils";
+import { compressImage, getImageSize } from "@/lib/utils";
 import { fasilitasSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fasilitas, FasilitasType } from "@prisma/client";
@@ -66,6 +66,8 @@ const ClientForm = ({ initialData, fasilitasTypes }: Props) => {
     try {
       setIsLoading(true);
       let image;
+      let width;
+      let height;
 
       if (!!(values.image instanceof File)) {
         // upload image
@@ -73,6 +75,13 @@ const ClientForm = ({ initialData, fasilitasTypes }: Props) => {
         const imgRes = await startUpload([compressedImg]);
 
         image = imgRes?.[0].key;
+
+        if (imgRes?.[0]?.url) {
+          const size = await getImageSize(imgRes?.[0]?.url);
+
+          width = size.width;
+          height = size.height;
+        }
       }
 
       if (initialData) {
@@ -80,12 +89,16 @@ const ClientForm = ({ initialData, fasilitasTypes }: Props) => {
         await axios.patch(`/api/fasilitas/${initialData.id}`, {
           ...values,
           image,
+          width,
+          height,
         });
       } else {
         // create new
         await axios.post("/api/fasilitas", {
           ...values,
           image,
+          width,
+          height,
         });
       }
 

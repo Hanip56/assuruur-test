@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import GridItem from "./grid-item";
 import { Fasilitas, FasilitasType } from "@prisma/client";
+import Fotos from "@/components/fotos";
 
 type Props = {
   fasilitasTypes: FasilitasType[];
@@ -39,13 +40,8 @@ const FasilitasCLient = ({ fasilitasTypes, fasilitass }: Props) => {
       </div>
 
       {/* informasi grid */}
-      <div
-        data-aos="fade"
-        className="my-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-8"
-      >
-        {fasilitass?.map((fasilitas, i) => (
-          <GridItem key={fasilitas.id} fasilitas={fasilitas} />
-        ))}
+      <div className="my-20 max-w-7xl mx-auto px-2 sm:px-4">
+        <Fotos fotos={fasilitass} />
       </div>
     </div>
   );

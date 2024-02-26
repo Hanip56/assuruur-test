@@ -1,4 +1,3 @@
-import React from "react";
 import Banner from "../../_components/banner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { name, description, type, image } = await req.json();
+    const { name, description, type, image, width, height } = await req.json();
 
-    if (!image || !name || !description || !type) {
+    if (!image || !name || !description || !type || !width || !height) {
       return new NextResponse("Required field is missing", { status: 400 });
     }
 
@@ -28,6 +28,8 @@ export async function POST(req: Request) {
           fasilitasTypeId: type,
           image,
           slug: slugify(name),
+          width,
+          height,
         },
       });
     } catch (error) {

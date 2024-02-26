@@ -1,5 +1,6 @@
 import { BASE_IMAGE_URL } from "@/constants";
 import { Article } from "@prisma/client";
+import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,7 +9,7 @@ type Props = {
   article: Article;
 };
 
-const GridItem = ({ article: { title, image, slug } }: Props) => {
+const GridItem = ({ article: { title, image, slug, createdAt } }: Props) => {
   return (
     <Link href={`/informasi/${slug}`}>
       <div className="w-full flex flex-col gap-3 group hover:opacity-75 transition">
@@ -25,7 +26,7 @@ const GridItem = ({ article: { title, image, slug } }: Props) => {
           <h5 className="text-lg sm:text-xl font-semibold">
             {title.length > 50 ? title.slice(0, 50) + "..." : title}
           </h5>
-          <small>25 Februari 2024</small>
+          <small>{format(new Date(createdAt), "dd MMMM yyyy")}</small>
         </div>
       </div>
     </Link>

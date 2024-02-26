@@ -50,7 +50,7 @@ const DetailInformasiPage = async ({
             </p> */}
           </div>
           {/* share */}
-          <div className="flex items-center gap-2 text-gray-500">
+          {/* <div className="flex items-center gap-2 text-gray-500">
             <small>Bagikan:</small>
             <div className="flex gap-1">
               <button>
@@ -69,7 +69,7 @@ const DetailInformasiPage = async ({
                 <InstagramLogoIcon className="w-5 h-5" />
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* title */}
         <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-6 leading-normal lg:leading-normal">
@@ -89,8 +89,7 @@ const DetailInformasiPage = async ({
         {/* content */}
         <TiptapContent content={article.content} />
         {/* prev & next post */}
-        <div className="mt-16 flex justify-between items-center gap-1 sm:gap-16">
-          {/* prev */}
+        {/* <div className="mt-16 flex justify-between items-center gap-1 sm:gap-16">
           <Link href="#">
             <div className="flex gap-2 sm:gap-4 items-center hover:opacity-80 p-1 sm:p-4 rounded-lg hover:bg-secondary">
               <ChevronLeft className="border rounded-full border-black w-10 h-10 p-2 flex-shrink-0" />
@@ -104,7 +103,6 @@ const DetailInformasiPage = async ({
               </div>
             </div>
           </Link>
-          {/* next */}
           <Link href="#">
             <div className="flex gap-2 sm:gap-4 items-center text-right hover:opacity-80 p-1 sm:p-4 rounded-lg hover:bg-secondary">
               <div>
@@ -118,7 +116,7 @@ const DetailInformasiPage = async ({
               <ChevronRight className="border rounded-full border-black w-10 h-10 p-2 flex-shrink-0" />
             </div>
           </Link>
-        </div>
+        </div> */}
       </div>
       {/* related articles */}
       {/* <div className="hidden md:block basis-[30%] sticky">

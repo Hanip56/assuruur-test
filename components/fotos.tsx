@@ -1,13 +1,13 @@
 "use client";
 
 import { BASE_IMAGE_URL } from "@/constants";
-import { Foto } from "@prisma/client";
+import { Foto, Fasilitas } from "@prisma/client";
 import "photoswipe/dist/photoswipe.css";
 
 import { Gallery, Item } from "react-photoswipe-gallery";
 
 type Props = {
-  fotos: Foto[];
+  fotos: Fasilitas[] | Foto[];
 };
 
 const Fotos = ({ fotos }: Props) => (

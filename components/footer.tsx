@@ -1,8 +1,31 @@
 import Logo from "@/public/logo.png";
-import { InstagramLogoIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
+import instagramIcon from "@/public/icon/instagram.svg";
+import youtubeIcon from "@/public/icon/youtube.svg";
+import facebookIcon from "@/public/icon/facebook.svg";
+import tiktokIcon from "@/public/icon/tiktok.svg";
+import { baseInfo } from "@/constants";
 
 const Footer = () => {
+  const sosmeds = [
+    {
+      icon: instagramIcon,
+      href: baseInfo.instagram,
+    },
+    {
+      icon: youtubeIcon,
+      href: baseInfo.youtube,
+    },
+    {
+      icon: tiktokIcon,
+      href: baseInfo.tiktok,
+    },
+    {
+      icon: facebookIcon,
+      href: baseInfo.facebook,
+    },
+  ];
+
   return (
     <footer className="text-sm sm:text-base w-[100%] border-t" data-aos="fade">
       <div className="grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto px-2 sm:px-4 py-16 gap-12">
@@ -17,40 +40,30 @@ const Footer = () => {
               className="w-full h-full object-contain"
             />
           </div>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem,
-            tempora esse.
-          </p>
+          <p>{baseInfo.description}</p>
         </div>
         {/* right */}
         <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* alamat */}
           <div>
             <h6 className="font-bold mb-4">Alamat</h6>
-            <p>
-              Jl.Sindangreret No.72 Ds.Sukasari Kec. Pameungpeuk Kab. Bandung
-              40376
-            </p>
+            <p>{baseInfo.alamat}</p>
           </div>
           {/* sosmed */}
           <div>
             <h6 className="font-bold mb-4">Sosial media</h6>
             <div className="flex gap-4 flex-wrap">
-              <a href="#">
-                <InstagramLogoIcon className="w-6 h-6 hover:opacity-80" />
-              </a>
-              <a href="#">
-                <InstagramLogoIcon className="w-6 h-6 hover:opacity-80" />
-              </a>
-              <a href="#">
-                <InstagramLogoIcon className="w-6 h-6 hover:opacity-80" />
-              </a>
-              <a href="#">
-                <InstagramLogoIcon className="w-6 h-6 hover:opacity-80" />
-              </a>
-              <a href="#">
-                <InstagramLogoIcon className="w-6 h-6 hover:opacity-80" />
-              </a>
+              {sosmeds.map((sosmed) => (
+                <a href={sosmed.href} key={sosmed.href} target="_blank">
+                  <Image
+                    src={sosmed.icon}
+                    alt=""
+                    width={200}
+                    height={200}
+                    className="w-5 h-5 hover:opacity-80"
+                  />
+                </a>
+              ))}
             </div>
           </div>
 
