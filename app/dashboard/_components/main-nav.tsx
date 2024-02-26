@@ -74,7 +74,7 @@ const MainNav = () => {
   return (
     <nav className="my-6 px-3">
       <div className="font-semibold text-sm pl-4 text-gray-400 tracking-wide mb-3">
-        E-commerce
+        Assuruur
       </div>
       {routes.map((route) => (
         <Link href={route.path} key={route.path}>

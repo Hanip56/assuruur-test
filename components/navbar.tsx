@@ -4,6 +4,7 @@ import Logo from "@/public/logo.png";
 import { SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { db } from "@/lib/db";
+import MobileNav from "./mobile-nav";
 
 const Navbar = async () => {
   const categories = await db.category.findMany();
@@ -35,7 +36,11 @@ const Navbar = async () => {
           </div>
         </div>
         <MainNav categories={categories} lembagas={lembagas} />
-        <Button size="icon" variant="ghost" className="rounded-full">
+        <Button
+          size="icon"
+          variant="ghost"
+          className="rounded-full hidden lg:block"
+        >
           <SearchIcon className="w-4 h-4" />
         </Button>
       </div>

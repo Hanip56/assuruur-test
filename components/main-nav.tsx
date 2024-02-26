@@ -12,8 +12,9 @@ import {
 import Link from "next/link";
 import NavItem from "./nav-item";
 import { Category } from "@prisma/client";
+import MobileNav from "./mobile-nav";
 
-type Route = {
+export type Route = {
   label: string;
   href?: string;
   sub?: {
@@ -83,36 +84,40 @@ const MainNav = ({ categories, lembagas }: Props) => {
   ];
 
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        {routes.map((route) =>
-          route.href ? (
-            <NavigationMenuItem key={route.label}>
-              <Link href={route.href} legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  {route.label}
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-          ) : (
-            <NavigationMenuItem key={route.label}>
-              <NavigationMenuTrigger>{route.label}</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  {route.sub?.map((r) => (
-                    <NavItem
-                      key={r.label}
-                      title={r.label}
-                      href={r.href}
-                    ></NavItem>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          )
-        )}
-      </NavigationMenuList>
-    </NavigationMenu>
+    <>
+      {/* mobile Nav */}
+      <MobileNav routes={routes} />
+      <NavigationMenu className="hidden lg:block">
+        <NavigationMenuList>
+          {routes.map((route) =>
+            route.href ? (
+              <NavigationMenuItem key={route.label}>
+                <Link href={route.href} legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {route.label}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ) : (
+              <NavigationMenuItem key={route.label}>
+                <NavigationMenuTrigger>{route.label}</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                    {route.sub?.map((r) => (
+                      <NavItem
+                        key={r.label}
+                        title={r.label}
+                        href={r.href}
+                      ></NavItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            )
+          )}
+        </NavigationMenuList>
+      </NavigationMenu>
+    </>
   );
 };
 
