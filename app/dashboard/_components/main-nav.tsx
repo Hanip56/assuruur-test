@@ -13,6 +13,7 @@ import {
   Building,
   Building2,
   ImageIcon,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -68,6 +69,12 @@ const MainNav = () => {
       path: "/dashboard/fotos",
       icon: <ImageIcon />,
       active: pathname === "/dashboard/fotos",
+    },
+    {
+      label: "Users",
+      path: "/dashboard/users",
+      icon: <Users />,
+      active: pathname === "/dashboard/users",
     },
   ];
 

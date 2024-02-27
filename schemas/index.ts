@@ -15,7 +15,9 @@ export const LoginSchema = z.object({
 
 export const RegisterSchema = z.object({
   username: z.string().min(3, "Must at least 3 characters"),
+  email: z.string().email(),
   password: z.string().min(6, "Must at least 6 characters"),
+  confirmPassword: z.string().min(1, "Confirm password is required"),
 });
 
 export const tagSchema = z.object({
