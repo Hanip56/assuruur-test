@@ -87,13 +87,13 @@ const MainNav = () => {
         <Link href={route.path} key={route.path}>
           <div
             className={cn(
-              "py-3 px-4 flex gap-2 items-center font-semibold transition",
+              "py-3 px-4 flex gap-2 items-center font-semibold transition ",
               route.active
                 ? "ring-1 ring-slate-300 shadow-sm rounded-md"
                 : "text-gray-400 hover:text-black dark:hover:text-white"
             )}
           >
-            {route.icon}
+            <span className="[&>*]:w-5 [&>*]:h-5">{route.icon}</span>
             <span className="text-sm">{route.label}</span>
           </div>
         </Link>

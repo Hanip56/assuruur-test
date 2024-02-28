@@ -17,6 +17,7 @@ const FotosPage = async () => {
   const formattedFotos = fotos.map((foto) => ({
     id: foto.id,
     description: foto.description ?? "",
+    url: "https://utfs.io/f/" + foto.image,
   }));
 
   return (

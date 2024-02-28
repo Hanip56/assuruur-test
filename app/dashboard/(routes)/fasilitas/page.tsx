@@ -12,11 +12,16 @@ const FasilitasPage = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      type: true,
+    },
   });
 
   const formattedFasilitass = fasilitass.map((fasilitas) => ({
     id: fasilitas.id,
     name: fasilitas.name,
+    url: "https://utfs.io/f/" + fasilitas.image,
+    type: fasilitas.type.name,
   }));
 
   return (

@@ -19,8 +19,8 @@ const FasilitasTypePage = async () => {
     <Container>
       <div className="flex items-center justify-between">
         <Heading
-          title="FasilitasTypes"
-          description="Manage your fasilitasTypes"
+          title="Fasilitas Types"
+          description="Manage your fasilitas types"
         />
         <Link href="fasilitas-type/new">
           <Button>

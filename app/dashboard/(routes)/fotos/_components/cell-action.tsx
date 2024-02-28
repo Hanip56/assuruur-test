@@ -26,8 +26,8 @@ const CellAction = ({ data }: CellActionProps) => {
   const router = useRouter();
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(data.id);
-    toast.success("Foto ID copied to clipboard.");
+    navigator.clipboard.writeText(data.url);
+    toast.success("Foto URL copied to clipboard.");
   };
 
   const handleDelete = async () => {
@@ -62,7 +62,7 @@ const CellAction = ({ data }: CellActionProps) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={handleCopy}>
-            <Copy className="mr-2 w-4 h-4" /> Copy Id
+            <Copy className="mr-2 w-4 h-4" /> Copy URL
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => router.push(`fotos/${data.id}`)}>
             <Edit className="mr-2 w-4 h-4" /> Edit

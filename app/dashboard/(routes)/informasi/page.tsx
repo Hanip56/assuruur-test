@@ -12,11 +12,15 @@ const ArticlePage = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      category: true,
+    },
   });
 
   const formattedArticles = articles.map((article) => ({
     id: article.id,
     title: article.title,
+    category: article.category.name,
   }));
 
   return (
