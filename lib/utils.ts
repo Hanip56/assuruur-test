@@ -64,3 +64,13 @@ export function getImageSize(
 export function getDate(date: string) {
   return format(new Date(2014, 1, 11), "yyyy-mm-dd");
 }
+
+export function cutString(value: string, max: number) {
+  return value.length > max ? value.slice(0, max) + "..." : value;
+}
+
+export function encodeSearch(value: string) {
+  const v = value.trim();
+
+  return encodeURIComponent(v).replace(/%20/g, "+");
+}

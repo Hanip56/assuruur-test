@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { db } from "@/lib/db";
 import MobileNav from "./mobile-nav";
 import Link from "next/link";
+import SearchDialog from "./search-dialog";
 
 const Navbar = async () => {
   const categories = await db.category.findMany();
@@ -39,16 +40,7 @@ const Navbar = async () => {
           </Link>
         </div>
         <MainNav categories={categories} lembagas={lembagas} />
-        {/* <form>
-          <div className="rounded-full hidden lg:flex border has-[:focused]:ring-black">
-            <SearchIcon className="w-4 h-4" />
-            <input
-              type="text"
-              placeholder="Search..."
-              className="outline-none bg-transparent"
-            />
-          </div>
-        </form> */}
+        <SearchDialog />
       </div>
     </div>
   );

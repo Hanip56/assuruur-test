@@ -63,7 +63,7 @@ const MobileNav = ({ routes }: { routes: Route[] }) => {
           </div>
           {routes.map((route) => {
             return route.href ? (
-              <Link href={route.href ?? ""} key={route.href}>
+              <Link href={route.label ?? ""} key={route.href}>
                 <div
                   className={cn(
                     "py-3 px-4 flex gap-2 items-center font-semibold transition",
@@ -76,7 +76,7 @@ const MobileNav = ({ routes }: { routes: Route[] }) => {
                 </div>
               </Link>
             ) : (
-              <Accordion type="single" collapsible key={route.href}>
+              <Accordion type="single" collapsible key={route.label}>
                 <AccordionItem
                   value="item-1"
                   className="border-none py-1 px-4 text-sm text-gray-400 hover:text-black"

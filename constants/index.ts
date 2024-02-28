@@ -17,3 +17,5 @@ export const baseInfo = {
   facebook: "https://www.facebook.com/assuruurponpes/",
   description: "Pondok Pesantren Assuruur",
 };
+
+export const excludeArticles = [contentIds.sejarah, contentIds.pendaftaran];

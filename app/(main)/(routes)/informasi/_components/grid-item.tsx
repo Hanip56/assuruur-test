@@ -1,12 +1,16 @@
 import { BASE_IMAGE_URL } from "@/constants";
-import { Article } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 type Props = {
-  article: Article;
+  article: {
+    title: string;
+    slug: string | null;
+    image: string;
+    createdAt: Date;
+  };
 };
 
 const GridItem = ({ article: { title, image, slug, createdAt } }: Props) => {

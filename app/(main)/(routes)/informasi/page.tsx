@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import GridItem from "./_components/grid-item";
 import { db } from "@/lib/db";
-import { contentIds } from "@/constants";
+import { excludeArticles } from "@/constants";
 
 const InformasiPage = async ({
   searchParams,
@@ -19,24 +19,15 @@ const InformasiPage = async ({
 
   const articles = await db.article.findMany({
     where: {
-      AND: [
-        {
-          categoryId:
-            currentCategoryIndex < 0
-              ? undefined
-              : categories[currentCategoryIndex].id,
+      categoryId:
+        currentCategoryIndex < 0
+          ? undefined
+          : categories[currentCategoryIndex].id,
+      NOT: {
+        id: {
+          in: excludeArticles,
         },
-        {
-          NOT: [
-            {
-              id: contentIds.pendaftaran,
-            },
-            {
-              id: contentIds.sejarah,
-            },
-          ],
-        },
-      ],
+      },
     },
   });
 
