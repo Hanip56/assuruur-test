@@ -9,7 +9,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import qs from "query-string";
 
 type Props = {
   totalItem: number;
@@ -19,6 +21,9 @@ type Props = {
 
 const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
+  const searchParams = useSearchParams();
+  const params = qs.parse(searchParams.toString());
+
   const totalPage = Math.ceil(totalItem / viewPerPage);
   const isCanNext = currentPage >= 1 && currentPage < totalPage;
   const isCanPrev = currentPage !== 1;
@@ -60,6 +65,21 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
     }
   }
 
+  const handleNavigate = useCallback(
+    (page: number) => {
+      const query = {
+        ...params,
+        page,
+      };
+
+      return qs.stringifyUrl({
+        url: window.location.href,
+        query,
+      });
+    },
+    [params]
+  );
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -71,50 +91,42 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
   return (
     <Pagination className="mt-12">
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href={isCanPrev ? `?page=${currentPage - 1}` : ""}
-          />
-        </PaginationItem>
+        <PaginationPrevious
+          href={isCanPrev ? handleNavigate(currentPage - 1) : ""}
+        />
         <div className="hidden sm:flex flex-wrap">
           {(mode === "right" || mode === "center") && (
             <>
-              <PaginationItem>
-                <PaginationLink href={`?page=1`}>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
+              <PaginationLink href={`?page=1`}>1</PaginationLink>
+
+              <PaginationEllipsis />
             </>
           )}
 
           {pages.map((page) => (
-            <PaginationItem key={page}>
-              <PaginationLink
-                isActive={page === currentPage}
-                href={`?page=${page}`}
-              >
-                {page}
-              </PaginationLink>
-            </PaginationItem>
+            <PaginationLink
+              key={page}
+              isActive={page === currentPage}
+              href={handleNavigate(page)}
+            >
+              {page}
+            </PaginationLink>
           ))}
 
           {(mode === "left" || mode === "center") && (
             <>
-              <PaginationItem>
-                <PaginationEllipsis />
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href={`?page=${totalPage}`}>
-                  {totalPage}
-                </PaginationLink>
-              </PaginationItem>
+              <PaginationEllipsis />
+
+              <PaginationLink href={handleNavigate(totalPage)}>
+                {totalPage}
+              </PaginationLink>
             </>
           )}
         </div>
-        <PaginationItem>
-          <PaginationNext href={isCanNext ? `?page=${currentPage + 1}` : ""} />
-        </PaginationItem>
+
+        <PaginationNext
+          href={isCanNext ? handleNavigate(currentPage + 1) : ""}
+        />
       </PaginationContent>
     </Pagination>
   );

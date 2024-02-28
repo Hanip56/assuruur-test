@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import ClientForm from "./_components/client-form";
 import { excludeArticles } from "@/constants";
 import Link from "next/link";
+import PaginationCustom from "@/components/pagination-custom";
 
 const SearchPage = async ({
   searchParams,
@@ -35,7 +36,7 @@ const SearchPage = async ({
     },
   });
 
-  const perPage = 9;
+  const perPage = 10;
   const currentPage = searchParams.page ? Number(searchParams.page) : 1;
 
   const searchedArticle = await db.article.findMany({
@@ -102,6 +103,12 @@ const SearchPage = async ({
             <FormError message="Tidak ada hasil yang ditemukan" />
           )}
         </div>
+
+        <PaginationCustom
+          currentPage={currentPage}
+          totalItem={totalSearchedArticle}
+          viewPerPage={perPage}
+        />
       </div>
     </div>
   );

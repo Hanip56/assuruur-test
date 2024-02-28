@@ -42,6 +42,7 @@
     "next-auth": "^5.0.0-beta.13",
     "next-share": "^0.27.0",
     "next-themes": "^0.2.1",
+    "query-string": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
