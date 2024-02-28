@@ -3,6 +3,7 @@
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -22,10 +23,41 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
   const isCanNext = currentPage >= 1 && currentPage < totalPage;
   const isCanPrev = currentPage !== 1;
 
+  let mode: "left" | "center" | "right" | undefined;
+
+  if (totalPage > 6) {
+    if (currentPage < 4) {
+      mode = "left";
+    } else if (currentPage > totalPage - 3) {
+      mode = "right";
+    } else {
+      mode = "center";
+    }
+  }
+
+  console.log({ mode });
+
   let pages = [];
 
-  for (let i = 1; i <= totalPage; i++) {
-    pages.push(i);
+  if (!mode) {
+    for (let i = 1; i <= totalPage; i++) {
+      pages.push(i);
+    }
+  } else {
+    let start = 1;
+    let end = 4;
+
+    if (mode === "right") {
+      start = totalPage - 3;
+      end = totalPage;
+    } else if (mode === "center") {
+      start = currentPage - 1;
+      end = currentPage + 1;
+    }
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
   }
 
   useEffect(() => {
@@ -33,6 +65,8 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
   }, []);
 
   if (!isMounted) return null;
+
+  if (totalPage === 1) return null;
 
   return (
     <Pagination className="mt-12">
@@ -43,6 +77,17 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
           />
         </PaginationItem>
         <div className="hidden sm:flex flex-wrap">
+          {(mode === "right" || mode === "center") && (
+            <>
+              <PaginationItem>
+                <PaginationLink href={`?page=1`}>1</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+            </>
+          )}
+
           {pages.map((page) => (
             <PaginationItem key={page}>
               <PaginationLink
@@ -53,6 +98,19 @@ const PaginationCustom = ({ currentPage, totalItem, viewPerPage }: Props) => {
               </PaginationLink>
             </PaginationItem>
           ))}
+
+          {(mode === "left" || mode === "center") && (
+            <>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href={`?page=${totalPage}`}>
+                  {totalPage}
+                </PaginationLink>
+              </PaginationItem>
+            </>
+          )}
         </div>
         <PaginationItem>
           <PaginationNext href={isCanNext ? `?page=${currentPage + 1}` : ""} />
