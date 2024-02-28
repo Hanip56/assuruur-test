@@ -23,6 +23,7 @@ import {
   Heading6,
   Quote,
 } from "lucide-react";
+import ImageEditor from "./image-editor";
 
 type Props = {
   editor: Editor | null;
@@ -156,7 +157,8 @@ export function Toolbar({ editor }: Props) {
       >
         <TextAlignRightIcon className="w-4 h-4" />
       </Toggle>
-      <Button
+      <ImageEditor editor={editor} />
+      {/* <Button
         type="button"
         size="icon"
         variant="ghost"
@@ -169,11 +171,10 @@ export function Toolbar({ editor }: Props) {
               src: "https://utfs.io/f/5fd1a569-ce83-40eb-a0e0-2c01aa75823a-kvu00e.jpg",
             })
             .run();
-          // editor.chain().focus().insertContent(`<div>Hello World</div>`).run();
         }}
       >
         <ImageIcon className="w-4 h-4" />
-      </Button>
+      </Button> */}
     </div>
   );
 }

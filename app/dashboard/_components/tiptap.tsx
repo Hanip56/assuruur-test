@@ -3,8 +3,6 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Toolbar } from "./tiptap-toolbar";
-// import HardBreak from "@tiptap/extension-hard-break";
-// import ImageTiptap from "./ImageTiptap";
 import TextAlign from "@tiptap/extension-text-align";
 import ImageTiptap from "@tiptap/extension-image";
 import { Node } from "@tiptap/core";
@@ -29,16 +27,9 @@ const Tiptap = ({ description, onChange }: Props) => {
         HTMLAttributes: {
           class: "w-full",
         },
+        allowBase64: true,
       }),
-      // HardBreak.extend({
-      //   addKeyboardShortcuts() {
-      //     return {
-      //       Enter: () => this.editor.commands.setHardBreak(),
-      //     };
-      //   },
-      // }),
     ],
-    // editable: false,
     editorProps: {
       attributes: {
         class:

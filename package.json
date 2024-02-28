@@ -47,6 +47,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "react-hot-toast": "^2.4.1",
+    "react-image-crop": "^11.0.5",
     "react-leaflet": "^4.2.1",
     "react-photoswipe-gallery": "^3.0.1",
     "react-select": "^5.8.0",

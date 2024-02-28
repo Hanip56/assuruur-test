@@ -74,3 +74,11 @@ export function encodeSearch(value: string) {
 
   return encodeURIComponent(v).replace(/%20/g, "+");
 }
+
+export const toBase64 = (file: File) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
