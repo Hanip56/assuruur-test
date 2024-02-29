@@ -2,18 +2,22 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import CellAction from "./cell-action";
+import { Button } from "@/components/ui/button";
+import ApproveBtn from "./approve-btn";
 
 export type CommentColumn = {
   id: string;
+  informasiId: string;
   username: string;
   comment: string;
   date: string;
+  isApprove: boolean;
 };
 
 export const columns: ColumnDef<CommentColumn>[] = [
   {
-    accessorKey: "id",
-    header: "Id",
+    accessorKey: "informasiId",
+    header: "Comment on Informasi Id",
   },
   {
     accessorKey: "username",
@@ -30,6 +34,16 @@ export const columns: ColumnDef<CommentColumn>[] = [
   {
     accessorKey: "date",
     header: "Date",
+  },
+  {
+    accessorKey: "isApprove",
+    header: "Is Approved",
+    cell: ({ row }) => (
+      <ApproveBtn
+        commentId={row.original.id}
+        isApproved={row.original.isApprove}
+      />
+    ),
   },
   {
     id: "actions",

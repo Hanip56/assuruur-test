@@ -1,5 +1,26 @@
 import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(req: NextRequest) {
+  try {
+    const articleId = req.nextUrl.searchParams.get("articleId") ?? "";
+
+    if (!articleId)
+      return new NextResponse("articleId is required", { status: 400 });
+
+    const comments = await db.comment.findMany({
+      where: {
+        articleId,
+        isApprove: true,
+      },
+    });
+
+    return NextResponse.json(comments);
+  } catch (error) {
+    console.log("[COMMENT_GET]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}
 
 export async function POST(req: Request) {
   try {

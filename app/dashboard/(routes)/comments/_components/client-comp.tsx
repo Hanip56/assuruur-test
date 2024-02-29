@@ -10,7 +10,7 @@ type Props = {
 const ClientComp = ({ data }: Props) => {
   return (
     <>
-      <DataTable data={data} columns={columns} searchKey="name" />
+      <DataTable data={data} columns={columns} searchKey="informasiId" />
     </>
   );
 };

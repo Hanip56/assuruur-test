@@ -3,9 +3,6 @@ import Container from "../../_components/container";
 import Heading from "../../_components/heading";
 import { Separator } from "@/components/ui/separator";
 import ClientComp from "./_components/client-comp";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
 import { format } from "date-fns";
 
 const CommentPage = async () => {
@@ -21,6 +18,8 @@ const CommentPage = async () => {
     email: comment.email,
     comment: comment.body,
     date: format(new Date(comment.createdAt), "dd-MM-yyyy"),
+    isApprove: comment.isApprove,
+    informasiId: comment.articleId,
   }));
 
   return (
