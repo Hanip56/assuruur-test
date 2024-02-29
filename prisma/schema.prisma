@@ -49,6 +49,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   Article       Article[]
+  Comment       Comment[]
 }
 
 model Article {
@@ -162,16 +163,19 @@ model Foto {
 }
 
 model Comment {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  articleId String   @db.ObjectId
-  article   Article  @relation(fields: [articleId], references: [id])
-  parentId  String?  @db.ObjectId
-  userId    String?  @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  articleId String    @db.ObjectId
+  article   Article   @relation(fields: [articleId], references: [id])
+  parentId  String?   @db.ObjectId
+  parent    Comment?  @relation("CommentToOwn", references: [id], fields: [parentId], onDelete: NoAction, onUpdate: NoAction)
+  childrens Comment[] @relation("CommentToOwn")
+  userId    String?   @db.ObjectId
+  user      User?     @relation(fields: [userId], references: [id])
   image     String?
-  username  String
+  username  String?
   body      String
   email     String?
-  isApprove Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isApprove Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

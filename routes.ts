@@ -7,6 +7,8 @@ export const publicRoutes = [
   "/fasilitas",
   "/foto",
 
+  "/api/comments",
+
   "/kontak",
 
   "/pendaftaran",
@@ -14,7 +16,7 @@ export const publicRoutes = [
   "/sejarah",
 ];
 
-export const publicRegexs = [/\/lembaga(.*)/, /\/informasi(.*)/];
+export const publicRegexs = [/\/lembaga(.*)/, /\/informasi(.*)/, /\/api(.*)/];
 
 /**
  * An array of routes that are used for auth

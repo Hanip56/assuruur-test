@@ -13,6 +13,9 @@ export async function GET(req: NextRequest) {
         articleId,
         isApprove: true,
       },
+      include: {
+        user: true,
+      },
     });
 
     return NextResponse.json(comments);
@@ -29,7 +32,7 @@ export async function POST(req: Request) {
     const { username, email, body, userId, image, parentId, articleId } =
       await req.json();
 
-    if (!username || !email || !body || !articleId)
+    if (!body || !articleId)
       return new NextResponse("Required field is missing", { status: 400 });
 
     const articleExist = await db.article.findUnique({
@@ -53,14 +56,22 @@ export async function POST(req: Request) {
       }
     }
 
+    // if it's admin just use userId if not then fill credentials
+    let parseData = isAdmin
+      ? {
+          userId,
+        }
+      : {
+          username,
+          email,
+          image,
+        };
+
     const comment = await db.comment.create({
       data: {
+        ...parseData,
         body,
-        username,
-        email,
         articleId,
-        userId,
-        image,
         parentId,
         isApprove: isAdmin,
       },

@@ -38,3 +38,37 @@ export async function PATCH(
     return new NextResponse("Internal error", { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: Request,
+  { params }: { params: { commentId: string } }
+) {
+  try {
+    const session = await auth();
+
+    if (!session || !session.user) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const commentExist = await db.comment.findUnique({
+      where: {
+        id: params.commentId,
+      },
+    });
+
+    if (!commentExist) {
+      return new NextResponse("Comment not found", { status: 404 });
+    }
+
+    await db.comment.delete({
+      where: {
+        id: params.commentId,
+      },
+    });
+
+    return NextResponse.json("deleted");
+  } catch (error) {
+    console.log("[COMMENT_ID_DELETE]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}

@@ -10,11 +10,14 @@ const CommentPage = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      user: true,
+    },
   });
 
   const formattedComments = comments.map((comment) => ({
     id: comment.id,
-    username: comment.username,
+    username: comment.username ?? comment?.user?.name + " (admin)",
     email: comment.email,
     comment: comment.body,
     date: format(new Date(comment.createdAt), "dd-MM-yyyy"),

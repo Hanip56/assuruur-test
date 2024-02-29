@@ -55,7 +55,7 @@ const ApproveBtn = ({
           onClick={() => setOpen(true)}
           disabled={isApproved}
         >
-          {isApproved ? "Approve" : "Approved"}
+          {isApproved ? "Approved" : "Approve"}
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -37,7 +37,7 @@ const CellAction = ({ data }: CellActionProps) => {
       toast.success(`Comment with id ${data.id} has been deleted.`);
       router.refresh();
     } catch (error) {
-      toast.error("Make sure you are deleted informasi using this comment");
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
       setOpen(false);
@@ -63,9 +63,6 @@ const CellAction = ({ data }: CellActionProps) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuItem onClick={handleCopy}>
             <Copy className="mr-2 w-4 h-4" /> Copy Id
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`comments/${data.id}`)}>
-            <Edit className="mr-2 w-4 h-4" /> Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 w-4 h-4" /> Delete
