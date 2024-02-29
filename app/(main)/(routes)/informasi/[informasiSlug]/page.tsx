@@ -2,19 +2,35 @@ import TiptapContent from "@/components/tiptap-content";
 import { BASE_IMAGE_URL, excludeArticles } from "@/constants";
 import { db } from "@/lib/db";
 import { cutString } from "@/lib/utils";
-import { InstagramLogoIcon } from "@radix-ui/react-icons";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import GridItem from "../_components/grid-item";
 import ShareSosmed from "@/app/(main)/_components/share-sosmed";
+import { Metadata } from "next";
+import Comments from "./_components/comments";
 
-const DetailInformasiPage = async ({
-  params,
-}: {
+type Props = {
   params: { informasiSlug: string };
-}) => {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params.informasiSlug;
+
+  const article = await db.article.findFirst({
+    where: { slug },
+  });
+
+  return {
+    title: article?.title,
+    openGraph: {
+      images: ["https://utfs.io/f/" + article?.image],
+    },
+  };
+}
+
+const DetailInformasiPage = async ({ params }: Props) => {
   const article = await db.article.findFirst({
     where: {
       slug: params.informasiSlug,
@@ -196,6 +212,8 @@ const DetailInformasiPage = async ({
           </div>
         </div>
       </div>
+      {/* comments */}
+      <Comments article={article} />
     </div>
   );
 };

@@ -1,8 +1,13 @@
 import React, { useMemo } from "react";
 import Banner from "../../_components/banner";
 import dynamic from "next/dynamic";
-import { Mail, MapIcon, Navigation, Navigation2, Phone } from "lucide-react";
+import { Mail, MapIcon, Phone } from "lucide-react";
 import { baseInfo } from "@/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kontak & Alamat",
+};
 
 const KontakPage = () => {
   const Map = useMemo(

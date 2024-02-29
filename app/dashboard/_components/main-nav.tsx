@@ -14,6 +14,7 @@ import {
   Building2,
   ImageIcon,
   Users,
+  MessageSquareText,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -45,6 +46,12 @@ const MainNav = () => {
       path: "/dashboard/informasi",
       icon: <InfoIcon />,
       active: pathname === "/dashboard/informasi",
+    },
+    {
+      label: "Comments",
+      path: "/dashboard/comments",
+      icon: <MessageSquareText />,
+      active: pathname === "/dashboard/comments",
     },
     {
       label: "Lembaga",

@@ -15,7 +15,7 @@ datasource db {
 
 enum UserRole {
   ADMIN
-  USER
+  SUPERADMIN
 }
 
 model Account {
@@ -42,7 +42,7 @@ model User {
   name          String?   @unique
   password      String?
   email         String?
-  role          UserRole  @default(USER)
+  role          UserRole  @default(ADMIN)
   emailVerified DateTime?
   image         String?
   createdAt     DateTime  @default(now())
@@ -62,6 +62,7 @@ model Article {
   categoryId String           @db.ObjectId
   category   Category         @relation(fields: [categoryId], references: [id])
   tags       TagsOnArticles[]
+  Comment    Comment[]
   createdAt  DateTime         @default(now())
   updatedAt  DateTime         @updatedAt
 }
@@ -158,4 +159,19 @@ model Foto {
   height      Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  articleId String   @db.ObjectId
+  article   Article  @relation(fields: [articleId], references: [id])
+  parentId  String?  @db.ObjectId
+  userId    String?  @db.ObjectId
+  image     String?
+  username  String
+  body      String
+  email     String?
+  isApprove Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

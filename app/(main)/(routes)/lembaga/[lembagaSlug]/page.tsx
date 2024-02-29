@@ -3,8 +3,26 @@ import { BASE_IMAGE_URL } from "@/constants";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import ClientComp from "./_components/client-comp";
+import { Metadata, ResolvingMetadata } from "next";
 
-const LembagaPage = async ({ params }: { params: { lembagaSlug: string } }) => {
+type Props = { params: { lembagaSlug: string } };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = params.lembagaSlug;
+
+  const lembaga = await db.lembaga.findFirst({
+    where: { slug },
+  });
+
+  return {
+    title: lembaga?.name,
+    openGraph: {
+      images: ["https://utfs.io/f/" + lembaga?.image],
+    },
+  };
+}
+
+const LembagaPage = async ({ params }: Props) => {
   const lembaga = await db.lembaga.findFirst({
     where: {
       slug: params.lembagaSlug,

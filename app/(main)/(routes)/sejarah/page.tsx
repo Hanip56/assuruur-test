@@ -1,13 +1,17 @@
 import React from "react";
 import Banner from "../../_components/banner";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import TiptapContent from "@/components/tiptap-content";
 import Image from "next/image";
 import { BASE_IMAGE_URL, contentIds } from "@/constants";
-import { InstagramLogoIcon } from "@radix-ui/react-icons";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sejarah",
+};
 
 const SejarahPage = async () => {
   const article = await db.article.findUnique({

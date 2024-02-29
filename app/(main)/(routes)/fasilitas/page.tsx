@@ -2,6 +2,11 @@ import React from "react";
 import Banner from "../../_components/banner";
 import FasilitasCLient from "./_components/fasilitas-client";
 import { db } from "@/lib/db";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Fasilitas",
+};
 
 const FasilitasPage = async ({
   searchParams,

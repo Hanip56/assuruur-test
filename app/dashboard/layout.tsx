@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import Sidebar from "./_components/sidebar";
 import Topbar from "./_components/topbar";
 import { ThemeProvider } from "@/components/theme-provider";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
 
 export default async function DashboardLayout({
   children,

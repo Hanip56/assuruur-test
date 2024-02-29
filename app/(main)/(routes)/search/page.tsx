@@ -4,6 +4,11 @@ import ClientForm from "./_components/client-form";
 import { excludeArticles } from "@/constants";
 import Link from "next/link";
 import PaginationCustom from "@/components/pagination-custom";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Search",
+};
 
 const SearchPage = async ({
   searchParams,

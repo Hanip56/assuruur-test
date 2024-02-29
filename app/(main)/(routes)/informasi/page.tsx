@@ -4,6 +4,11 @@ import Link from "next/link";
 import GridItem from "./_components/grid-item";
 import { db } from "@/lib/db";
 import { excludeArticles } from "@/constants";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Informasi",
+};
 
 const InformasiPage = async ({
   searchParams,

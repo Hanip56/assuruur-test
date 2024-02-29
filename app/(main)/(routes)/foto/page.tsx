@@ -3,6 +3,11 @@ import Banner from "../../_components/banner";
 import Fotos from "@/components/fotos";
 import { db } from "@/lib/db";
 import PaginationCustom from "@/components/pagination-custom";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Foto",
+};
 
 const FotoPage = async ({
   searchParams,
