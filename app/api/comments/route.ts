@@ -8,15 +8,22 @@ export async function GET(req: NextRequest) {
     if (!articleId)
       return new NextResponse("articleId is required", { status: 400 });
 
-    const comments = await db.comment.findMany({
+    let comments = await db.comment.findMany({
       where: {
         articleId,
         isApprove: true,
       },
       include: {
         user: true,
+        childrens: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
+
+    comments = comments.filter((comment) => !comment?.parentId);
 
     return NextResponse.json(comments);
   } catch (error) {

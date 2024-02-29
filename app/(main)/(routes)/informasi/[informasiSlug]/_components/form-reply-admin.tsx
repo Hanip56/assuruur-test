@@ -28,9 +28,10 @@ const replySchema = z.object({
 type Props = {
   articleId: string;
   refresh: () => void;
+  parentId?: string;
 };
 
-const FormReplyAdmin = ({ articleId, refresh }: Props) => {
+const FormReplyAdmin = ({ articleId, refresh, parentId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -52,6 +53,7 @@ const FormReplyAdmin = ({ articleId, refresh }: Props) => {
         body: values.komentar,
         articleId,
         userId: session.data?.user?.id,
+        parentId,
       };
 
       await axios.post("/api/comments", data);

@@ -17,7 +17,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import * as z from "zod";
 
 const replySchema = z.object({
@@ -26,7 +25,13 @@ const replySchema = z.object({
   email: z.string().email("Email harus valid email."),
 });
 
-const FormReply = ({ articleId }: { articleId: string }) => {
+const FormReply = ({
+  articleId,
+  parentId,
+}: {
+  articleId: string;
+  parentId?: string;
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -50,6 +55,7 @@ const FormReply = ({ articleId }: { articleId: string }) => {
         body: values.komentar,
         email: values.email,
         articleId,
+        parentId,
       };
 
       await axios.post("/api/comments", data);

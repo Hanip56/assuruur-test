@@ -3,23 +3,22 @@
 import { Button } from "@/components/ui/button";
 import React, { useCallback, useEffect, useState } from "react";
 import Comment from "./comment";
-import FormReply from "./form-reply";
 import { Article, Comment as CommentType, User } from "@prisma/client";
 import axios from "axios";
-import { useSession } from "next-auth/react";
-import FormReplyAdmin from "./form-reply-admin";
+import Reply from "./reply";
 
 type Props = {
   article: Article;
 };
 
-type CommentTypeWithUser = CommentType & { user: User };
+type CommentTypeWithUser = CommentType & {
+  user?: User;
+  childrens?: CommentTypeWithUser[];
+};
 
 const Comments = ({ article }: Props) => {
-  const [isMounted, setIsMounted] = useState(false);
   const [comments, setComments] = useState<CommentTypeWithUser[]>([]);
-  const session = useSession();
-  const isAdmin = session && session.data?.user;
+  const [parentId, setParentId] = useState("");
 
   const fetchComments = useCallback(async () => {
     try {
@@ -34,13 +33,8 @@ const Comments = ({ article }: Props) => {
   }, [article.id]);
 
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
-
     fetchComments();
-  }, [fetchComments, isMounted]);
+  }, [fetchComments]);
 
   console.log({ comments });
 
@@ -74,31 +68,19 @@ const Comments = ({ article }: Props) => {
       {comments?.length > 0 && (
         <div className="mb-20">
           {comments?.map((comment, i) => (
-            <Comment key={i} comment={comment} />
+            <Comment
+              key={i}
+              comment={comment}
+              parentId={parentId}
+              setParentId={setParentId}
+              refresh={() => fetchComments()}
+              articleId={article.id}
+            />
           ))}
         </div>
       )}
       {/* Leave a reply */}
-      <div className="pb-28">
-        <div className="flex justify-between items-center mb-16">
-          <h2 className="font-bold text-2xl sm:text-3xl md:text-4xl">
-            Beri Tanggapan{" "}
-            {isAdmin && (
-              <span className="text-base text-blueAssuruur">
-                Sebagai: {session.data?.user?.name}
-              </span>
-            )}
-          </h2>
-        </div>
-        {session && session.data?.user ? (
-          <FormReplyAdmin
-            refresh={() => fetchComments()}
-            articleId={article.id}
-          />
-        ) : (
-          <FormReply articleId={article.id} />
-        )}
-      </div>
+      <Reply articleId={article.id} refresh={() => fetchComments()} />
     </div>
   );
 };
