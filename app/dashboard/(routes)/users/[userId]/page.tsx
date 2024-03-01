@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { isObjectId } from "@/lib/utils";
 import UpdateForm from "./_components/update-form";
 import CreateForm from "./_components/create-form";
+import { redirect } from "next/navigation";
 
 const DetailUserPage = async ({ params }: { params: { userId: string } }) => {
   let user;
@@ -16,6 +17,9 @@ const DetailUserPage = async ({ params }: { params: { userId: string } }) => {
       },
     });
   }
+
+  if (user && user.role === "SUPERADMIN") return redirect("../users");
+
   return (
     <Container>
       <Heading

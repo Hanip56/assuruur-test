@@ -13,6 +13,7 @@ export type FotoColumn = {
 export const columns: ColumnDef<FotoColumn>[] = [
   {
     accessorKey: "url",
+    id: "preview",
     header: "Image",
     cell: ({ row }) => (
       <div className="w-14 h-14 rounded-md">
@@ -28,6 +29,7 @@ export const columns: ColumnDef<FotoColumn>[] = [
   },
   {
     accessorKey: "url",
+    id: "url",
     header: "URL",
     cell: ({ row }) => <p>{row.getValue("url")}</p>,
   },

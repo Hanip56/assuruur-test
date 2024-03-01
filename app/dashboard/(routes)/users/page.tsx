@@ -6,8 +6,14 @@ import ClientComp from "./_components/client-comp";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 const UserPage = async () => {
+  const session = await auth();
+
+  if (session?.user.role !== "SUPERADMIN") return redirect("/dashboard");
+
   const users = await db.user.findMany({
     orderBy: {
       createdAt: "desc",

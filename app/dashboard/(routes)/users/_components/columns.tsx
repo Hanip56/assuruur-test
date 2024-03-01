@@ -25,6 +25,7 @@ export const columns: ColumnDef<UserColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
+    cell: ({ row }) =>
+      row.original.role !== "SUPERADMIN" && <CellAction data={row.original} />,
   },
 ];

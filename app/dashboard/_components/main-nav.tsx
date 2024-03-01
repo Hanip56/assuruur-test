@@ -3,10 +3,7 @@
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
-  FileArchive,
-  PictureInPicture,
   TagIcon,
-  ActivityIcon,
   TicketMinus,
   InfoIcon,
   School,
@@ -15,12 +12,15 @@ import {
   ImageIcon,
   Users,
   MessageSquareText,
+  Settings,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
 
 const MainNav = () => {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const routes = [
     {
@@ -77,13 +77,23 @@ const MainNav = () => {
       icon: <ImageIcon />,
       active: pathname === "/dashboard/fotos",
     },
-    {
+  ];
+
+  if (session?.user.role === "SUPERADMIN") {
+    routes.push({
       label: "Users",
       path: "/dashboard/users",
       icon: <Users />,
       active: pathname === "/dashboard/users",
-    },
-  ];
+    });
+  } else {
+    routes.push({
+      label: "Settings",
+      path: "/dashboard/settings",
+      icon: <Settings />,
+      active: pathname === "/dashboard/settings",
+    });
+  }
 
   return (
     <nav className="my-6 px-3">
