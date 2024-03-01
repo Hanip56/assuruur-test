@@ -20,9 +20,20 @@ const HomePage = async () => {
       ],
     },
     take: 6,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
-  return <HomeClient latestInfo={latestInfo} />;
+  const lembagas = await db.lembaga.findMany({
+    where: {
+      NOT: {
+        id: contentIds.profil,
+      },
+    },
+  });
+
+  return <HomeClient latestInfo={latestInfo} lembagas={lembagas} />;
 };
 
 export default HomePage;

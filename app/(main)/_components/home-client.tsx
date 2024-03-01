@@ -5,16 +5,17 @@ import Slideshow from "@/components/slideshow";
 import { Button } from "@/components/ui/button";
 import { BASE_IMAGE_URL } from "@/constants";
 import { cn } from "@/lib/utils";
-import { Article } from "@prisma/client";
+import { Article, Lembaga } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import LembagaCarousel from "./lembaga-carousel";
 
 type Props = {
   latestInfo: Article[];
+  lembagas: Lembaga[];
 };
 
-const HomeClient = ({ latestInfo }: Props) => {
+const HomeClient = ({ latestInfo, lembagas }: Props) => {
   const latestInfoRow1 = [...latestInfo.slice(0, 3)];
   const latestInfoRow2 = [...latestInfo.slice(3, 6)];
 
@@ -50,7 +51,11 @@ const HomeClient = ({ latestInfo }: Props) => {
         </div>
       </section>
 
-      <Section title="Info Terbaru">
+      <Section
+        title="Info Terbaru"
+        buttonLabel="berita lainnya"
+        buttonHref="/informasi?type=semua"
+      >
         <div className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {latestInfoRow1?.map((info, i) => (
@@ -101,6 +106,10 @@ const HomeClient = ({ latestInfo }: Props) => {
             ))}
           </div>
         </div>
+      </Section>
+
+      <Section title="Lembaga">
+        <LembagaCarousel lembagas={lembagas} />
       </Section>
     </div>
   );
