@@ -134,7 +134,7 @@ const DetailInformasiPage = async ({ params }: Props) => {
             {/* share */}
             <div className="flex items-center gap-2 text-gray-500">
               <small>Bagikan:</small>
-              <ShareSosmed quote={article.title} />
+              <ShareSosmed quote={article.title} url={window.location.href} />
             </div>
           </div>
           {/* title */}
