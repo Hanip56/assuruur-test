@@ -80,7 +80,9 @@ const Comments = ({ article }: Props) => {
         </div>
       )}
       {/* Leave a reply */}
-      <Reply articleId={article.id} refresh={() => fetchComments()} />
+      {!parentId && (
+        <Reply articleId={article.id} refresh={() => fetchComments()} />
+      )}
     </div>
   );
 };

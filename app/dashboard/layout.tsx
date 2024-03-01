@@ -13,21 +13,21 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <div className="flex">
-        <Topbar />
-        <div className="hidden h-screen md:block w-60 flex-shrink-0">
-          <div className="fixed h-full w-60 border-r">
-            <Sidebar />
-          </div>
+    // <ThemeProvider
+    //   attribute="class"
+    //   defaultTheme="system"
+    //   enableSystem
+    //   disableTransitionOnChange
+    // >
+    <div className="flex">
+      <Topbar />
+      <div className="hidden h-screen md:block w-60 flex-shrink-0">
+        <div className="fixed h-full w-60 border-r">
+          <Sidebar />
         </div>
-        <main className="w-full h-full pt-14">{children}</main>
       </div>
-    </ThemeProvider>
+      <main className="w-full h-full pt-14">{children}</main>
+    </div>
+    // </ThemeProvider>
   );
 }

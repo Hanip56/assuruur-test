@@ -10,12 +10,21 @@ export const {
   signOut,
 } = NextAuth({
   callbacks: {
-    async jwt({ token }) {
+    async jwt({ token, user, profile, account }) {
+      if (user) {
+        token.user = user;
+      }
       return token;
     },
-    async session({ token, session }) {
+    async session({ token, session, user }) {
       if (token.sub) {
         session.user.id = token.sub;
+      }
+
+      // @ts-ignore
+      if (token.user && token.user?.role) {
+        // @ts-ignore
+        session.user.role = token.user.role as "ADMIN" | "SUPERADMIN";
       }
 
       return session;

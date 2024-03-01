@@ -37,7 +37,9 @@ const CellAction = ({ data }: CellActionProps) => {
       toast.success(`User with id ${data.id} has been deleted.`);
       router.refresh();
     } catch (error) {
-      toast.error("Make sure you are deleted informasi using this user");
+      toast.error(
+        "Make sure you are deleted article or comment using this user"
+      );
     } finally {
       setIsLoading(false);
       setOpen(false);

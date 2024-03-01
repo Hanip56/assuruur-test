@@ -82,3 +82,18 @@ export const toBase64 = (file: File) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
   });
+
+export function getErrorMessage(error: any) {
+  let message = "Something went wrong";
+
+  if (
+    error?.response &&
+    error.response?.status &&
+    error.response.status !== 500 &&
+    error.response?.data
+  ) {
+    message = error.response.data;
+  }
+
+  return message;
+}
