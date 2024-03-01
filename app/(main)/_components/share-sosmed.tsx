@@ -10,37 +10,31 @@ import {
   EmailShareButton,
   EmailIcon,
 } from "next-share";
-import { usePathname } from "next/navigation";
 
-type Props = {};
+type Props = { quote: string };
 
-const ShareSosmed = () => {
-  const pathname = usePathname();
-
+const ShareSosmed = ({ quote }: Props) => {
   const url = window.location.href;
+
+  quote = quote + " | Ponpes Assuruur";
 
   return (
     <div className="flex gap-2 items-center">
-      <FacebookShareButton
-        url={url}
-        quote={"next-share is a social share buttons for your next React apps."}
-        hashtag={"#nextshare"}
-        blankTarget={true}
-      >
+      <FacebookShareButton url={url} quote={quote}>
         <FacebookIcon size={24} round />
       </FacebookShareButton>
       <WhatsappShareButton
         url={url}
-        title={"next-share is a social share buttons for your next React apps."}
+        title={quote}
         separator=":: "
         blankTarget={true}
       >
         <WhatsappIcon size={24} round />
       </WhatsappShareButton>
-      <TwitterShareButton url={url} blankTarget={true}>
+      <TwitterShareButton url={url}>
         <TwitterIcon size={24} round />
       </TwitterShareButton>
-      <EmailShareButton url={url} blankTarget={true}>
+      <EmailShareButton url={url}>
         <EmailIcon size={24} round />
       </EmailShareButton>
     </div>

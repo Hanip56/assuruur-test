@@ -37,7 +37,9 @@ const PendaftaranPage = async () => {
               {/* breadcrumbs */}
               <div className="flex gap-1 items-center text-xs text-gray-500">
                 <Link href={"/"}>
-                  <span className="hover:text-blue-500 transition">Home</span>
+                  <span className="hover:text-blue-500 transition">
+                    Beranda
+                  </span>
                 </Link>
                 <ChevronRight className="w-2 h-2" />
                 <span className="max-w-sm">Pendaftaran</span>

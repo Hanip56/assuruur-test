@@ -63,7 +63,7 @@ const MobileNav = ({ routes }: { routes: Route[] }) => {
           </div>
           {routes.map((route) => {
             return route.href ? (
-              <Link href={route.label ?? ""} key={route.href}>
+              <Link href={route.href ?? ""} key={route.href}>
                 <div
                   className={cn(
                     "py-3 px-4 flex gap-2 items-center font-semibold transition",

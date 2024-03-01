@@ -28,37 +28,6 @@ const ProfilClient = ({ profil }: Props) => {
     <div className="w-[100%]">
       {/* main */}
       <div className="my-20">
-        {/* pendiri dan wakif */}
-        <section className="mb-16 max-w-6xl px-2 sm:px-4 mx-auto">
-          {/* <h3
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-12"
-            data-aos="fade-up"
-          >
-            Pendiri dan Wakif
-          </h3> */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 gap-y-8 sm:gap-6 md:gap-8">
-            {profil?.pimpinan.map((tokoh, i) => (
-              <div key={tokoh.id} data-aos="fade-up" data-aos-delay={i * 200}>
-                <div className="p-4 shadow-lg rounded-2xl">
-                  <div className="relative pb-[120%] bg-black rounded-2xl overflow-hidden">
-                    <Image
-                      src={`${BASE_IMAGE_URL}/${tokoh.image}`}
-                      alt=""
-                      className="absolute top-0 left-0 w-full h-full object-cover"
-                      width={1000}
-                      height={1000}
-                    />
-                  </div>
-                </div>
-                <div className="mt-2 sm:mt-6 text-center">
-                  <h5 className="font-bold text-xl">{tokoh.name}</h5>
-                  <p>{tokoh.title}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* profil singkat */}
         <Section className="max-w-6xl" title="">
           <TiptapContent content={profil?.profile ?? ""} />
@@ -101,9 +70,9 @@ const ProfilClient = ({ profil }: Props) => {
                       <div className="w-full h-full border border-white/40 p-8 pl-14">
                         <h4 className="text-3xl font-bold my-8 mt-12 relative">
                           Misi
-                          <h5 className="text-2xl sm:text-3xl absolute opacity-50 -top-12 -left-5">
+                          <span className="text-2xl sm:text-3xl absolute opacity-50 -top-12 -left-5">
                             0{i + 1}
-                          </h5>
+                          </span>
                         </h4>
                         <p>{misi.content}</p>
                       </div>

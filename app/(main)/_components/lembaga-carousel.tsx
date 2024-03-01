@@ -42,7 +42,7 @@ const LembagaCarousel = ({ lembagas }: { lembagas: Lembaga[] }) => {
               key={index}
               className="md:basis-1/2 lg:basis-1/3 pl-6"
             >
-              <Link href={`/informasi/${lembaga.slug}`}>
+              <Link href={`/lembaga/${lembaga.slug}`}>
                 <div className="rounded-lg overflow-hidden shadow-lg border group">
                   <div className="relative flex aspect-video items-center justify-center overflow-hidden">
                     <div className="absolute top-0 left-0 inset-0 bg-black/30 opacity-0 group-hover:opacity-100 z-10 transition duration-300 flex items-center justify-center text-center">
