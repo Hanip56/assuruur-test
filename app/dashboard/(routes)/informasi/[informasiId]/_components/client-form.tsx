@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage } from "@/lib/utils";
+import { compressImage, getErrorMessage } from "@/lib/utils";
 import { articleSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Article, Category, Tag, TagsOnArticles } from "@prisma/client";
@@ -111,7 +111,7 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
       form.reset();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

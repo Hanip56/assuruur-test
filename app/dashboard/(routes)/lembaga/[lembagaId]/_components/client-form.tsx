@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage } from "@/lib/utils";
+import { compressImage, getErrorMessage } from "@/lib/utils";
 import { lembagaSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Lembaga, Misi, Pimpinan } from "@prisma/client";
@@ -93,7 +93,7 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
       form.reset();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

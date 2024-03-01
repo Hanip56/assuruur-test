@@ -2,8 +2,6 @@ import { Separator } from "@/components/ui/separator";
 import Container from "../../_components/container";
 import Heading from "../../_components/heading";
 import { auth } from "@/auth";
-import Image from "next/image";
-import { BASE_IMAGE_URL } from "@/constants";
 import { db } from "@/lib/db";
 import ClientForm from "./_components/client-form";
 import { redirect } from "next/navigation";

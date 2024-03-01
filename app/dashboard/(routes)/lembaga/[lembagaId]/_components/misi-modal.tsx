@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Modal from "@/components/ui/modal";
+import { getErrorMessage } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Misi } from "@prisma/client";
 import axios from "axios";
@@ -65,7 +66,7 @@ const MisiModal = ({ isOpen, setIsOpen, misis }: Props) => {
       router.refresh();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

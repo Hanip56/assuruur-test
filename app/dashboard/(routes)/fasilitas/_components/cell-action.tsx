@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios from "axios";
 import AlertModal from "@/components/ui/alert-modal";
+import { getErrorMessage } from "@/lib/utils";
 
 type CellActionProps = {
   data: FasilitasColumn;
@@ -37,7 +38,8 @@ const CellAction = ({ data }: CellActionProps) => {
       toast.success(`Fasilitas with id ${data.id} has been deleted.`);
       router.refresh();
     } catch (error) {
-      toast.error("Something went wrong");
+      console.log(error);
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
       setOpen(false);

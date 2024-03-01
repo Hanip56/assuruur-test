@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage, getImageSize } from "@/lib/utils";
+import { compressImage, getErrorMessage, getImageSize } from "@/lib/utils";
 import { fasilitasSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Fasilitas, FasilitasType } from "@prisma/client";
@@ -108,7 +108,7 @@ const ClientForm = ({ initialData, fasilitasTypes }: Props) => {
       form.reset();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

@@ -9,6 +9,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { getErrorMessage } from "@/lib/utils";
 import { tagSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Tag } from "@prisma/client";
@@ -48,8 +49,7 @@ const ClientForm = ({ initialData }: Props) => {
       router.refresh();
     } catch (error) {
       console.log(error);
-      // toast.error((error as any)?.response?.data ?? "Something went wrong");
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

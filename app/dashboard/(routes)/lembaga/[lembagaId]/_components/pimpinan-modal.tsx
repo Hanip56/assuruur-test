@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import Modal from "@/components/ui/modal";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage } from "@/lib/utils";
+import { compressImage, getErrorMessage } from "@/lib/utils";
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pimpinan } from "@prisma/client";
@@ -124,7 +124,7 @@ const PimpinanModal = ({
       form.reset();
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }
