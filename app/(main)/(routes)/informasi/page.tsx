@@ -5,6 +5,7 @@ import GridItem from "./_components/grid-item";
 import { db } from "@/lib/db";
 import { excludeArticles } from "@/constants";
 import { Metadata } from "next";
+import PaginationCustom from "@/components/pagination-custom";
 
 export const metadata: Metadata = {
   title: "Informasi",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 const InformasiPage = async ({
   searchParams,
 }: {
-  searchParams: { type: string };
+  searchParams: { type: string; page: string };
 }) => {
   const categories = await db.category.findMany();
   const currentCategory = searchParams.type;
@@ -21,6 +22,23 @@ const InformasiPage = async ({
   const currentCategoryIndex = categories.findIndex(
     (c) => c.slug === currentCategory
   );
+
+  // pagination
+  const totalArticles = await db.article.count({
+    where: {
+      categoryId:
+        currentCategoryIndex < 0
+          ? undefined
+          : categories[currentCategoryIndex].id,
+      NOT: {
+        id: {
+          in: excludeArticles,
+        },
+      },
+    },
+  });
+  const perPage = 9;
+  const currentPage = searchParams.page ? Number(searchParams.page) : 1;
 
   const articles = await db.article.findMany({
     where: {
@@ -34,6 +52,12 @@ const InformasiPage = async ({
         },
       },
     },
+    include: {
+      category: true,
+    },
+    orderBy: { createdAt: "desc" },
+    take: perPage,
+    skip: perPage * (currentPage - 1),
   });
 
   const tabs = [
@@ -72,6 +96,11 @@ const InformasiPage = async ({
             <GridItem key={i} article={article} />
           ))}
         </div>
+        <PaginationCustom
+          totalItem={totalArticles}
+          viewPerPage={perPage}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );

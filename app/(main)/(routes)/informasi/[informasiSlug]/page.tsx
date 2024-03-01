@@ -97,12 +97,8 @@ const DetailInformasiPage = async ({ params }: Props) => {
       },
     },
     take: 3,
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      image: true,
-      createdAt: true,
+    include: {
+      category: true,
     },
   });
 

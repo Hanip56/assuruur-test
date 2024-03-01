@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import GridItem from "./grid-item";
 import { Fasilitas, FasilitasType } from "@prisma/client";
 import Fotos from "@/components/fotos";
 
