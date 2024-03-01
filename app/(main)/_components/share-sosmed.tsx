@@ -11,9 +11,11 @@ import {
   EmailIcon,
 } from "next-share";
 
-type Props = { quote: string; url: string };
+type Props = { quote: string };
 
-const ShareSosmed = ({ quote, url }: Props) => {
+const ShareSosmed = ({ quote }: Props) => {
+  const url = window.location.href;
+
   quote = quote + " | Ponpes Assuruur";
 
   return (
