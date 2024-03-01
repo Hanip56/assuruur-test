@@ -1,4 +1,4 @@
-import Logo from "@/public/logo.png";
+import Logo from "@/public/logo-footer-white.png";
 import Image from "next/image";
 import instagramIcon from "@/public/icon/instagram.svg";
 import youtubeIcon from "@/public/icon/youtube.svg";
@@ -27,11 +27,14 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="text-sm sm:text-base w-[100%] border-t" data-aos="fade">
-      <div className="grid grid-cols-1 md:grid-cols-3 max-w-7xl mx-auto px-2 sm:px-4 py-16 gap-12">
+    <footer
+      className="text-sm sm:text-base w-[100%] border-t text-white bg-blueAssuruur"
+      data-aos="fade"
+    >
+      <div className="max-w-5xl mx-auto px-2 sm:px-4 py-8 gap-4 flex flex-col items-center justify-center">
         {/* left */}
         <div>
-          <div className="w-20 h-20 mb-4">
+          <div className="w-48 h-48 sm:w-60 sm:h-60">
             <Image
               src={Logo}
               alt="Assuruur Logo"
@@ -40,44 +43,33 @@ const Footer = () => {
               className="w-full h-full object-contain"
             />
           </div>
-          <p>{baseInfo.description}</p>
         </div>
-        {/* right */}
-        <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="text-center text-sm sm:text-base">
           {/* alamat */}
-          <div>
-            <h6 className="font-bold mb-4">Alamat</h6>
-            <p>{baseInfo.alamat}</p>
+          <div className="leading-7 sm:leading-8 text-gray-300">
+            <p>{baseInfo.alamat}</p>{" "}
+            <p className="mt-2 font-medium">(022) 8593 0310 / 0813 2261 0259</p>
           </div>
-          {/* sosmed */}
-          <div>
-            <h6 className="font-bold mb-4">Sosial media</h6>
-            <div className="flex gap-4 flex-wrap">
-              {sosmeds.map((sosmed) => (
-                <a href={sosmed.href} key={sosmed.href} target="_blank">
-                  <Image
-                    src={sosmed.icon}
-                    alt=""
-                    width={200}
-                    height={200}
-                    className="w-5 h-5 hover:opacity-80"
-                  />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* telpon */}
-          <div>
-            <h6 className="font-bold mb-4">Telepon</h6>
-            <p>(022) 8593 0310 / 0813 2261 0259</p>
-          </div>
+        </div>
+        {/* sosmed */}
+        <div className="flex gap-4 flex-wrap mt-4">
+          {sosmeds.map((sosmed) => (
+            <a href={sosmed.href} key={sosmed.href} target="_blank">
+              <Image
+                src={sosmed.icon}
+                alt=""
+                width={200}
+                height={200}
+                className="w-5 h-5 hover:opacity-80"
+              />
+            </a>
+          ))}
         </div>
       </div>
 
-      <div className="py-6 text-sm text-gray-500">
+      <div className="py-6 text-sm text-gray-500 border-t border-gray-500/50">
         <p className="text-center">
-          Copyright © {new Date().getFullYear()} PPWS Ngabar | Assuruur
+          Copyright © {new Date().getFullYear()} | Assuruur Ponpes
         </p>
       </div>
     </footer>

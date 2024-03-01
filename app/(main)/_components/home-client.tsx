@@ -1,6 +1,7 @@
 "use client";
 
 import Section from "@/components/section";
+import Slideshow from "@/components/slideshow";
 import { Button } from "@/components/ui/button";
 import { BASE_IMAGE_URL } from "@/constants";
 import { cn } from "@/lib/utils";
@@ -20,19 +21,10 @@ const HomeClient = ({ latestInfo }: Props) => {
   return (
     <div>
       {/* hero */}
-      <section className="relative h-[40rem] overflow-x-hidden w-[100%]">
+      <section className="relative h-[90vh] overflow-x-hidden w-[100%]">
         <div className="-z-10 absolute w-full h-full">
-          <div className="absolute top-0 left-0 inset-0 bg-black opacity-30" />
-
-          <Image
-            src={
-              "https://plus.unsplash.com/premium_photo-1683880731561-f0cceb0ad405?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            }
-            alt="Hero-image"
-            className="w-full h-full object-cover"
-            width={2000}
-            height={2000}
-          ></Image>
+          <div className="absolute top-0 left-0 inset-0 bg-black opacity-30 z-50" />
+          <Slideshow />
         </div>
 
         {/* content */}
@@ -50,7 +42,9 @@ const HomeClient = ({ latestInfo }: Props) => {
               qui nobis.
             </p>
             <Link href={"/profil"}>
-              <Button className="bg-blue-900 mt-4">Read More</Button>
+              <Button variant={"assuruur"} className="mt-6 bg-sky-900">
+                Kunjungi Profil
+              </Button>
             </Link>
           </div>
         </div>

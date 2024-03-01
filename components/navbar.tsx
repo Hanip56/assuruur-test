@@ -1,10 +1,7 @@
 import Image from "next/image";
 import MainNav from "./main-nav";
-import Logo from "@/public/logo.png";
-import { SearchIcon } from "lucide-react";
-import { Button } from "./ui/button";
+import Logo from "@/public/logo-header.png";
 import { db } from "@/lib/db";
-import MobileNav from "./mobile-nav";
 import Link from "next/link";
 import SearchDialog from "./search-dialog";
 
@@ -28,7 +25,7 @@ const Navbar = async () => {
       <div className="flex justify-between items-center py-4 px-4 max-w-7xl mx-auto ">
         <div>
           <Link href="/">
-            <div className="w-12 h-12">
+            <div className="w-40 sm:w-48 py-1">
               <Image
                 src={Logo}
                 alt="Assuruur logo"
@@ -39,8 +36,12 @@ const Navbar = async () => {
             </div>
           </Link>
         </div>
-        <MainNav categories={categories} lembagas={lembagas} />
-        <SearchDialog />
+        <div className="flex">
+          <MainNav categories={categories} lembagas={lembagas} />
+          <div className="hidden lg:block">
+            <SearchDialog />
+          </div>
+        </div>
       </div>
     </div>
   );
