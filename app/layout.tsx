@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     default: "Pondok Pesantren Assuruur",
   },
   description: "The official Assuruur website",
+  metadataBase: new URL(process.env.BASE_URL!),
   openGraph: {
     title: "Pondok Pesantren Assuruur",
     siteName: "Pondok Pesantren Assuruur",
