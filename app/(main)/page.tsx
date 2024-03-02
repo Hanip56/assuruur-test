@@ -7,6 +7,15 @@ export const metadata: Metadata = {
 };
 
 const HomePage = async () => {
+  const banner = await db.banner.findFirst({
+    where: {
+      at: "beranda",
+    },
+    include: {
+      images: true,
+    },
+  });
+
   const latestInfo = await db.article.findMany({
     where: {
       isSplit: false,
@@ -23,7 +32,9 @@ const HomePage = async () => {
     },
   });
 
-  return <HomeClient latestInfo={latestInfo} lembagas={lembagas} />;
+  return (
+    <HomeClient latestInfo={latestInfo} lembagas={lembagas} banner={banner} />
+  );
 };
 
 export default HomePage;

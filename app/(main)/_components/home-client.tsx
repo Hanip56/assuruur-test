@@ -5,7 +5,7 @@ import Slideshow from "@/components/slideshow";
 import { Button } from "@/components/ui/button";
 import { BASE_IMAGE_URL } from "@/constants";
 import { cn } from "@/lib/utils";
-import { Article, Lembaga } from "@prisma/client";
+import { Article, Banner, BannerImage, Lembaga } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import LembagaCarousel from "./lembaga-carousel";
@@ -13,9 +13,10 @@ import LembagaCarousel from "./lembaga-carousel";
 type Props = {
   latestInfo: Article[];
   lembagas: Lembaga[];
+  banner?: (Banner & { images: BannerImage[] }) | null;
 };
 
-const HomeClient = ({ latestInfo, lembagas }: Props) => {
+const HomeClient = ({ latestInfo, lembagas, banner }: Props) => {
   const latestInfoRow1 = [...latestInfo.slice(0, 3)];
   const latestInfoRow2 = [...latestInfo.slice(3, 6)];
 
@@ -25,7 +26,13 @@ const HomeClient = ({ latestInfo, lembagas }: Props) => {
       <section className="relative h-[90vh] overflow-x-hidden w-[100%]">
         <div className="-z-10 absolute w-full h-full">
           <div className="absolute top-0 left-0 inset-0 bg-black opacity-30 z-50" />
-          <Slideshow />
+          <Slideshow
+            images={
+              banner?.images
+                ? banner.images.map((image) => `${BASE_IMAGE_URL}/` + image.key)
+                : []
+            }
+          />
         </div>
 
         {/* content */}
@@ -34,13 +41,18 @@ const HomeClient = ({ latestInfo, lembagas }: Props) => {
           data-aos="fade-left"
         >
           <div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold  leading-normal sm:leading-normal md:leading-normal lg:leading-normal mb-4">
-              Pondok <br /> Pesantren Assuruur
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold  leading-normal sm:leading-normal md:leading-normal lg:leading-normal mb-4 max-w-3xl">
+              {`${banner?.title}` ?? (
+                <>
+                  Pondok <br /> Pesantren Assuruur
+                </>
+              )}
             </h1>
             <p className="max-w-2xl">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
+              {banner?.description ??
+                `Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
               delectus praesentium quod ullam, officia labore harum neque porro
-              qui nobis.
+              qui nobis.`}
             </p>
             <Link href={"/profil"}>
               <Button variant={"assuruur"} className="mt-6 bg-sky-900">

@@ -130,3 +130,26 @@ export const fotoSchema = z.object({
       "Only .jpg, .jpeg, .png, and .webp formats are supported."
     ),
 });
+
+export const BerandaSchema = z.object({
+  images: z
+    .array(z.any())
+    .refine((files) => files.length > 0, "At least 1 image is required")
+    .refine(
+      (files) =>
+        files.every(
+          (file) => !(file instanceof File) || file.size <= MAX_FILE_SIZE
+        ),
+      "Max file size is 2mb"
+    )
+    .refine(
+      (files) =>
+        files.every(
+          (file) =>
+            !(file instanceof File) || ACCEPTED_IMAGE_TYPES.includes(file.type)
+        ),
+      "Only .jpg, .jpeg, .png, and .webp formats are supported."
+    ),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+});
