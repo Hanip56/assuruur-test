@@ -12,6 +12,7 @@ import { Metadata } from "next";
 import Comments from "./_components/comments";
 
 type Props = {
+  req: Request;
   params: { informasiSlug: string };
 };
 
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: article?.title,
       type: "article",
+      url: `${process.env.BASE_URL}/informasi/${article?.slug}`,
       images: [
         {
           url: "https://utfs.io/f/" + article?.image,

@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     title: "Pondok Pesantren Assuruur",
     siteName: "Pondok Pesantren Assuruur",
     type: "website",
+    url: `${process.env.BASE_URL}/`,
     images: [
       {
         url: "https://utfs.io/f/5d159a3d-ca34-4a67-afd1-2cea6600467a-cdr5vb.jpg",
