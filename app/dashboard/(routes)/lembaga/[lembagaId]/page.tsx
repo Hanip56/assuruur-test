@@ -2,10 +2,10 @@ import { db } from "@/lib/db";
 import Container from "../../../_components/container";
 import Heading from "../../../_components/heading";
 import { Separator } from "@/components/ui/separator";
-import ClientForm from "./_components/client-form";
 import { isObjectId } from "@/lib/utils";
 import { redirect } from "next/navigation";
 import { Misi } from "@prisma/client";
+import LembagaForm from "@/app/dashboard/_components/lembaga-form";
 
 const DetailLembagaPage = async ({
   params,
@@ -38,7 +38,11 @@ const DetailLembagaPage = async ({
         description={lembaga ? "Detail lembaga" : "Add new lembaga"}
       />
       <Separator className="my-4" />
-      <ClientForm initialData={lembaga} misis={misis} />
+      <LembagaForm
+        initialData={lembaga}
+        misis={misis}
+        successRedirect="../lembaga"
+      />
     </Container>
   );
 };

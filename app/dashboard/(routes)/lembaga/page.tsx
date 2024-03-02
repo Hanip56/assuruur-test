@@ -6,6 +6,9 @@ import ClientComp from "./_components/client-comp";
 
 const LembagaPage = async () => {
   const lembagas = await db.lembaga.findMany({
+    where: {
+      isSplit: false,
+    },
     orderBy: {
       createdAt: "desc",
     },

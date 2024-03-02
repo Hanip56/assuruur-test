@@ -9,6 +9,9 @@ import { PlusIcon } from "lucide-react";
 
 const ArticlePage = async () => {
   const articles = await db.article.findMany({
+    where: {
+      isSplit: false,
+    },
     orderBy: {
       createdAt: "desc",
     },

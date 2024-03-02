@@ -15,6 +15,16 @@ const fixContents = [
     description: "Manage your profil singkat",
     href: "/dashboard/profil",
   },
+  {
+    name: "Sejarah",
+    description: "Manage your sejarah",
+    href: "/dashboard/sejarah",
+  },
+  {
+    name: "Pendaftaran",
+    description: "Manage your pendaftaran",
+    href: "/dashboard/sejarah",
+  },
 ];
 
 const DashboardPage = async () => {
@@ -24,14 +34,16 @@ const DashboardPage = async () => {
       <Separator className="my-4" />
 
       {/* contents */}
-      <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
+      <div className="flex flex-col gap-2 sm:gap-4 lg:gap-6">
         {fixContents.map((content, i) => (
           <Link href={content.href} key={`content-${i}`}>
-            <div className="w-full flex gap-4 items-center rounded-xl border hover:bg-black hover:text-white transition dark:hover:bg-white dark:hover:text-black">
-              <div className="py-10 min-w-40 text-center border-r">
-                <h3 className="font-medium text-xl">{content.name}</h3>
+            <div className="w-full flex sm:gap-4 items-center justify-between rounded-xl border hover:bg-black hover:text-white transition dark:hover:bg-white dark:hover:text-black">
+              <div className="py-3 min-w-40 text-center border-r">
+                <h3 className="font-medium text-lg sm:text-xl">
+                  {content.name}
+                </h3>
               </div>
-              <div className="flex-1">
+              <div className="hidden sm:block flex-1">
                 <p>{content.description}</p>
               </div>
               <div className="p-10 border-l">

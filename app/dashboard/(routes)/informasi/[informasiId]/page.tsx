@@ -2,8 +2,8 @@ import { db } from "@/lib/db";
 import Container from "../../../_components/container";
 import Heading from "../../../_components/heading";
 import { Separator } from "@/components/ui/separator";
-import ClientForm from "./_components/client-form";
 import { isObjectId } from "@/lib/utils";
+import InformasiForm from "@/app/dashboard/_components/informasi-form";
 
 const DetailArticlePage = async ({
   params,
@@ -23,7 +23,6 @@ const DetailArticlePage = async ({
         tags: true,
       },
     });
-
   }
   return (
     <Container>
@@ -32,7 +31,12 @@ const DetailArticlePage = async ({
         description={article ? "Detail informasi" : "Add new informasi"}
       />
       <Separator className="my-4" />
-      <ClientForm initialData={article} categories={categories} tags={tags} />
+      <InformasiForm
+        initialData={article}
+        categories={categories}
+        tags={tags}
+        successRedirect="../informasi"
+      />
     </Container>
   );
 };

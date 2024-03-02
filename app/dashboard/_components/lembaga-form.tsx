@@ -31,9 +31,10 @@ import MisiModal from "./misi-modal";
 type Props = {
   initialData?: Lembaga | null;
   misis: Misi[];
+  successRedirect: string;
 };
 
-const ClientForm = ({ initialData, misis }: Props) => {
+const LembagaForm = ({ initialData, misis, successRedirect }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showMisiModal, setShowMisiModal] = useState(false);
 
@@ -84,7 +85,7 @@ const ClientForm = ({ initialData, misis }: Props) => {
       }
 
       toast.success(initialData ? "Lembaga updated" : "Lembaga created");
-      router.push("../lembaga");
+      router.push(successRedirect);
       router.refresh();
       form.reset();
     } catch (error) {
@@ -245,4 +246,4 @@ const ClientForm = ({ initialData, misis }: Props) => {
   );
 };
 
-export default ClientForm;
+export default LembagaForm;

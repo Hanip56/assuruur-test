@@ -41,9 +41,15 @@ type Props = {
   initialData?: ArticleWithTags | null;
   categories?: Category[] | null;
   tags?: Tag[] | null;
+  successRedirect: string;
 };
 
-const ClientForm = ({ initialData, categories, tags }: Props) => {
+const InformasiForm = ({
+  initialData,
+  categories,
+  tags,
+  successRedirect,
+}: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { startUpload } = useUploadThing("imageUploader");
   const router = useRouter();
@@ -106,7 +112,7 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
       }
 
       toast.success(initialData ? "Informasi updated" : "Informasi created");
-      router.push("../informasi");
+      router.push(successRedirect);
       router.refresh();
       form.reset();
     } catch (error) {
@@ -264,4 +270,4 @@ const ClientForm = ({ initialData, categories, tags }: Props) => {
   );
 };
 
-export default ClientForm;
+export default InformasiForm;
