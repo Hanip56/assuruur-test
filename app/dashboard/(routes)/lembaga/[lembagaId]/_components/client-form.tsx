@@ -17,7 +17,7 @@ import { useUploadThing } from "@/lib/upload-thing";
 import { compressImage, getErrorMessage } from "@/lib/utils";
 import { lembagaSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Lembaga, Misi, Pimpinan } from "@prisma/client";
+import { Lembaga, Misi } from "@prisma/client";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import Image from "next/image";
@@ -27,19 +27,15 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 import MisiModal from "./misi-modal";
-import PimpinanModal from "./pimpinan-modal";
 
 type Props = {
   initialData?: Lembaga | null;
   misis: Misi[];
-  pimpinans: Pimpinan[];
 };
 
-const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
+const ClientForm = ({ initialData, misis }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showMisiModal, setShowMisiModal] = useState(false);
-  const [showPimpinanModal, setShowPimpinanModal] = useState(false);
-  const [currentPimpinan, setCurrentPimpinan] = useState<Pimpinan>();
 
   const { startUpload } = useUploadThing("imageUploader");
   const router = useRouter();
@@ -106,13 +102,6 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
         setIsOpen={setShowMisiModal}
         misis={misis}
       />
-      <PimpinanModal
-        isOpen={showPimpinanModal}
-        setIsOpen={setShowPimpinanModal}
-        prePimpinan={currentPimpinan}
-        removePrePimpinan={() => setCurrentPimpinan(undefined)}
-      />
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-6">
@@ -152,46 +141,6 @@ const ClientForm = ({ initialData, misis, pimpinans }: Props) => {
                 </FormItem>
               )}
             />
-            {/* pimpinan */}
-            <div className="w-full rounded-xl border">
-              {/* header */}
-              <div className="px-6 py-4 flex justify-between items-center border-b">
-                <h3 className="text-base md:text-lg font-medium">Pimpinan</h3>
-              </div>
-              <div className="px-6 py-4 flex flex-col gap-2">
-                {pimpinans?.map((pimpinan) => (
-                  <div
-                    key={pimpinan.id}
-                    className="flex justify-between items-center text-sm gap-2"
-                  >
-                    {/* image */}
-                    <div className="w-20 h-20">
-                      <Image
-                        src={`${BASE_IMAGE_URL}/${pimpinan.image}`}
-                        alt=""
-                        width={200}
-                        height={200}
-                        className="w-full h-full  object-cover"
-                      />
-                    </div>
-                    <p className="hidden sm:inline">{pimpinan.name}</p>
-                    {/* action */}
-                    <div>
-                      <Button
-                        size={"sm"}
-                        type="button"
-                        onClick={() => {
-                          setCurrentPimpinan(pimpinan);
-                          setShowPimpinanModal(true);
-                        }}
-                      >
-                        Change
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
             {/* misi */}
             <div className="w-full rounded-xl border">
               {/* header */}

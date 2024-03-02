@@ -3,7 +3,7 @@ import { BASE_IMAGE_URL } from "@/constants";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import ClientComp from "./_components/client-comp";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = { params: { lembagaSlug: string } };
 
@@ -29,7 +29,6 @@ const LembagaPage = async ({ params }: Props) => {
     },
     include: {
       misi: true,
-      pimpinan: true,
     },
   });
 

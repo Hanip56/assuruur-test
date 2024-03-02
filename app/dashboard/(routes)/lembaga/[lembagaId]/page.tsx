@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import ClientForm from "./_components/client-form";
 import { isObjectId } from "@/lib/utils";
 import { redirect } from "next/navigation";
-import { Misi, Pimpinan } from "@prisma/client";
+import { Misi } from "@prisma/client";
 
 const DetailLembagaPage = async ({
   params,
@@ -14,7 +14,6 @@ const DetailLembagaPage = async ({
 }) => {
   let lembaga;
   let misis: Misi[] = [];
-  let pimpinans: Pimpinan[] = [];
 
   if (isObjectId(params.lembagaId)) {
     lembaga = await db.lembaga.findUnique({
@@ -24,12 +23,6 @@ const DetailLembagaPage = async ({
     });
 
     misis = await db.misi.findMany({
-      where: {
-        lembagaId: params.lembagaId,
-      },
-    });
-
-    pimpinans = await db.pimpinan.findMany({
       where: {
         lembagaId: params.lembagaId,
       },
@@ -45,7 +38,7 @@ const DetailLembagaPage = async ({
         description={lembaga ? "Detail lembaga" : "Add new lembaga"}
       />
       <Separator className="my-4" />
-      <ClientForm initialData={lembaga} misis={misis} pimpinans={pimpinans} />
+      <ClientForm initialData={lembaga} misis={misis} />
     </Container>
   );
 };

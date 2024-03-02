@@ -15,7 +15,6 @@ const ProfilePage = async () => {
     },
     include: {
       misi: true,
-      pimpinan: true,
     },
   });
 
