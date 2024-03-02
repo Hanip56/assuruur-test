@@ -10,13 +10,13 @@ import {
   EmailShareButton,
   EmailIcon,
 } from "next-share";
+import { usePathname } from "next/navigation";
 
 type Props = { quote: string };
 
 const ShareSosmed = ({ quote }: Props) => {
-  const url = window.location.href;
-
-  quote = quote + " | Ponpes Assuruur";
+  const pathname = usePathname();
+  const url = `${window.location.origin}${pathname}`;
 
   return (
     <div className="flex gap-2 items-center">
