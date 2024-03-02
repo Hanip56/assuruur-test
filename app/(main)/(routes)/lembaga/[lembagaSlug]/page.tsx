@@ -16,8 +16,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: lembaga?.name,
+    description: lembaga?.description,
     openGraph: {
-      images: ["https://utfs.io/f/" + lembaga?.image],
+      title: lembaga?.name,
+      description: lembaga?.description ?? "",
+      type: "article",
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/lembaga/${lembaga?.slug}`,
+      images: [
+        {
+          url: "https://utfs.io/f/" + lembaga?.image,
+          width: 1060,
+          height: 717,
+          alt: "",
+        },
+      ],
     },
   };
 }
