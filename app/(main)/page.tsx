@@ -1,6 +1,5 @@
 import { db } from "@/lib/db";
 import HomeClient from "./_components/home-client";
-import { contentIds } from "@/constants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,14 +9,7 @@ export const metadata: Metadata = {
 const HomePage = async () => {
   const latestInfo = await db.article.findMany({
     where: {
-      NOT: [
-        {
-          id: contentIds.pendaftaran,
-        },
-        {
-          id: contentIds.sejarah,
-        },
-      ],
+      isSplit: false,
     },
     take: 6,
     orderBy: {
@@ -27,9 +19,7 @@ const HomePage = async () => {
 
   const lembagas = await db.lembaga.findMany({
     where: {
-      NOT: {
-        id: contentIds.profil,
-      },
+      isSplit: false,
     },
   });
 

@@ -34,12 +34,12 @@ type Props = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   misis: Misi[];
+  lembagaId?: string;
 };
 
-const MisiModal = ({ isOpen, setIsOpen, misis }: Props) => {
+const MisiModal = ({ isOpen, setIsOpen, misis, lembagaId }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const params = useParams();
 
   const handleClose = () => {
     setIsOpen(false);
@@ -60,7 +60,7 @@ const MisiModal = ({ isOpen, setIsOpen, misis }: Props) => {
   const onSubmit = async (values: z.infer<typeof misiSchema>) => {
     setIsLoading(true);
     try {
-      await axios.post(`/api/lembaga/${params?.lembagaId}/misi`, values);
+      await axios.post(`/api/lembaga/${lembagaId}/misi`, values);
       toast.success("Misi updated");
       setIsOpen(false);
       router.refresh();

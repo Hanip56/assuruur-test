@@ -23,7 +23,7 @@ const fixContents = [
   {
     name: "Pendaftaran",
     description: "Manage your pendaftaran",
-    href: "/dashboard/sejarah",
+    href: "/dashboard/pendaftaran",
   },
 ];
 

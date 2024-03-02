@@ -1,7 +1,6 @@
 import { FormError } from "@/components/ui/form-error-alert";
 import { db } from "@/lib/db";
 import ClientForm from "./_components/client-form";
-import { excludeArticles } from "@/constants";
 import Link from "next/link";
 import PaginationCustom from "@/components/pagination-custom";
 import { Metadata } from "next";
@@ -33,11 +32,7 @@ const SearchPage = async ({
           },
         },
       ],
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
   });
 
@@ -60,11 +55,7 @@ const SearchPage = async ({
           },
         },
       ],
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
     include: {
       category: true,

@@ -102,6 +102,7 @@ const LembagaForm = ({ initialData, misis, successRedirect }: Props) => {
         isOpen={showMisiModal}
         setIsOpen={setShowMisiModal}
         misis={misis}
+        lembagaId={initialData?.id}
       />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>

@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { BASE_IMAGE_URL } from "@/constants";
 import { useUploadThing } from "@/lib/upload-thing";
-import { compressImage, getErrorMessage } from "@/lib/utils";
+import { cn, compressImage, getErrorMessage } from "@/lib/utils";
 import { articleSchema } from "@/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Article, Category, Tag, TagsOnArticles } from "@prisma/client";
@@ -42,6 +42,7 @@ type Props = {
   categories?: Category[] | null;
   tags?: Tag[] | null;
   successRedirect: string;
+  isSplit?: boolean;
 };
 
 const InformasiForm = ({
@@ -49,6 +50,7 @@ const InformasiForm = ({
   categories,
   tags,
   successRedirect,
+  isSplit = false,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const { startUpload } = useUploadThing("imageUploader");
@@ -144,7 +146,12 @@ const InformasiForm = ({
               </FormItem>
             )}
           />
-          <div className="flex flex-col md:flex-row gap-6 [&>*]:w-full">
+          <div
+            className={cn(
+              "flex flex-col md:flex-row gap-6 [&>*]:w-full",
+              isSplit && "sr-only"
+            )}
+          >
             {/* category */}
             <FormField
               control={form.control}

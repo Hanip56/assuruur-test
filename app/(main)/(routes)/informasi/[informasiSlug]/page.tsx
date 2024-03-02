@@ -59,11 +59,7 @@ const DetailInformasiPage = async ({ params }: Props) => {
   const prevPost = await db.article.findFirst({
     where: {
       createdAt: { lt: article.createdAt },
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
     select: {
       id: true,
@@ -78,11 +74,7 @@ const DetailInformasiPage = async ({ params }: Props) => {
   const nextPost = await db.article.findFirst({
     where: {
       createdAt: { gt: article.createdAt },
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
     select: {
       id: true,

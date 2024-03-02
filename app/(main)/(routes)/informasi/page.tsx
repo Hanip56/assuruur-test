@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import GridItem from "./_components/grid-item";
 import { db } from "@/lib/db";
-import { excludeArticles } from "@/constants";
 import { Metadata } from "next";
 import PaginationCustom from "@/components/pagination-custom";
 
@@ -30,11 +29,7 @@ const InformasiPage = async ({
         currentCategoryIndex < 0
           ? undefined
           : categories[currentCategoryIndex].id,
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
   });
   const perPage = 9;
@@ -46,11 +41,7 @@ const InformasiPage = async ({
         currentCategoryIndex < 0
           ? undefined
           : categories[currentCategoryIndex].id,
-      NOT: {
-        id: {
-          in: excludeArticles,
-        },
-      },
+      isSplit: false,
     },
     include: {
       category: true,
