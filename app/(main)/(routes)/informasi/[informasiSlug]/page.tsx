@@ -12,7 +12,6 @@ import { Metadata } from "next";
 import Comments from "./_components/comments";
 
 type Props = {
-  req: Request;
   params: { informasiSlug: string };
 };
 
