@@ -13,7 +13,20 @@ export const metadata: Metadata = {
     default: "Pondok Pesantren Assuruur",
   },
   description: "The official Assuruur website",
-  // metadataBase: new URL(process.env.BASE_URL),
+  openGraph: {
+    title: "Pondok Pesantren Assuruur",
+    siteName: "Pondok Pesantren Assuruur",
+    type: "website",
+    images: [
+      {
+        url: "https://utfs.io/f/5d159a3d-ca34-4a67-afd1-2cea6600467a-cdr5vb.jpg",
+        width: 640,
+        height: 425,
+        alt: "",
+      },
+    ],
+    locale: "id_ID",
+  },
 };
 
 export default async function RootLayout({
