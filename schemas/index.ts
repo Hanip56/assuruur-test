@@ -60,6 +60,7 @@ export const categorySchema = z.object({
 
 export const articleSchema = z.object({
   title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
   content: z.string().min(1, "Content is required"),
   image: z
     .any()
@@ -79,6 +80,7 @@ export const articleSchema = z.object({
 
 export const lembagaSchema = z.object({
   name: z.string().min(1, "Name is required"),
+  description: z.string().min(1, "Description is required"),
   profile: z.string().min(1, "Profile is requrired"),
   visi: z.string().min(1, "Visi is requrired"),
   moreInfo: z.string().optional(),

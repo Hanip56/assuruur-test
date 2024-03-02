@@ -46,12 +46,14 @@ const LembagaForm = ({ initialData, misis, successRedirect }: Props) => {
     defaultValues: {
       ...initialData,
       moreInfo: initialData?.moreInfo ?? "",
+      description: initialData?.description ?? "",
     } ?? {
       name: "",
       visi: "",
       image: "",
       profile: "",
       moreInfo: "",
+      description: "",
     },
   });
 
@@ -117,6 +119,24 @@ const LembagaForm = ({ initialData, misis, successRedirect }: Props) => {
                     <Input
                       {...field}
                       placeholder="Enter name"
+                      disabled={isLoading}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            {/* description */}
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Short description</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Enter description"
                       disabled={isLoading}
                     />
                   </FormControl>

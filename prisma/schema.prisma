@@ -53,20 +53,21 @@ model User {
 }
 
 model Article {
-  id         String           @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String           @db.ObjectId
-  author     User             @relation(fields: [userId], references: [id])
-  title      String           @unique
-  slug       String?
-  content    String
-  image      String
-  categoryId String           @db.ObjectId
-  category   Category         @relation(fields: [categoryId], references: [id])
-  tags       TagsOnArticles[]
-  Comment    Comment[]
-  isSplit    Boolean?         @default(false)
-  createdAt  DateTime         @default(now())
-  updatedAt  DateTime         @updatedAt
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String           @db.ObjectId
+  author      User             @relation(fields: [userId], references: [id])
+  title       String           @unique
+  description String?
+  slug        String?
+  content     String
+  image       String
+  categoryId  String           @db.ObjectId
+  category    Category         @relation(fields: [categoryId], references: [id])
+  tags        TagsOnArticles[]
+  Comment     Comment[]
+  isSplit     Boolean?         @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
 }
 
 model Category {
@@ -99,18 +100,19 @@ model TagsOnArticles {
 }
 
 model Lembaga {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  slug      String
-  profile   String
-  visi      String
-  moreInfo  String?
-  image     String?
-  isSplit   Boolean?   @default(false)
-  pimpinan  Pimpinan[]
-  misi      Misi[]
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  slug        String
+  profile     String
+  visi        String
+  description String?
+  moreInfo    String?
+  image       String?
+  isSplit     Boolean?   @default(false)
+  pimpinan    Pimpinan[]
+  misi        Misi[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 }
 
 model Pimpinan {

@@ -41,6 +41,7 @@ export async function PATCH(
         moreInfo: body?.moreInfo,
         visi: body?.visi,
         image: body?.image,
+        description: body?.description,
       },
     });
 

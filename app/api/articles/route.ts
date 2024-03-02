@@ -6,9 +6,10 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { image, title, content, category, tags } = await req.json();
+    const { image, title, content, category, tags, description } =
+      await req.json();
 
-    if (!image || !title || !content || !category || !tags) {
+    if (!image || !title || !content || !category || !tags || !description) {
       return new NextResponse("Required field is missing", { status: 400 });
     }
 
@@ -24,6 +25,7 @@ export async function POST(req: Request) {
       article = await db.article.create({
         data: {
           title,
+          description,
           content,
           image,
           userId: session.user.id,

@@ -53,6 +53,7 @@ export async function PATCH(
       },
       data: {
         title: body?.title,
+        description: body?.description,
         content: body?.content,
         image: body?.image,
         categoryId: body?.category,

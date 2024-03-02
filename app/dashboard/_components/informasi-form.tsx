@@ -62,6 +62,7 @@ const InformasiForm = ({
       ? {
           ...initialData,
           category: initialData?.categoryId,
+          description: initialData?.description ?? "",
           tags: initialData?.tags.map((tag) => tag.tagId),
         }
       : {
@@ -70,6 +71,7 @@ const InformasiForm = ({
           image: "",
           tags: [],
           title: "",
+          description: "",
         },
   });
 
@@ -139,6 +141,23 @@ const InformasiForm = ({
                   <Input
                     {...field}
                     placeholder="Enter title"
+                    disabled={isLoading}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Short Description</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Enter description"
                     disabled={isLoading}
                   />
                 </FormControl>
