@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     default: "Pondok Pesantren Assuruur",
   },
   description: "The official Assuruur website",
-  metadataBase: new URL(process.env.BASE_URL!),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   openGraph: {
     title: "Pondok Pesantren Assuruur",
     siteName: "Pondok Pesantren Assuruur",
     type: "website",
-    url: `${process.env.BASE_URL}/`,
+    url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
     images: [
       {
         url: "https://utfs.io/f/5d159a3d-ca34-4a67-afd1-2cea6600467a-cdr5vb.jpg",

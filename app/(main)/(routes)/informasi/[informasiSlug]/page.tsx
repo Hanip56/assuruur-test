@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: article?.title,
       type: "article",
-      url: `${process.env.BASE_URL}/informasi/${article?.slug}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/informasi/${article?.slug}`,
       images: [
         {
           url: "https://utfs.io/f/" + article?.image,

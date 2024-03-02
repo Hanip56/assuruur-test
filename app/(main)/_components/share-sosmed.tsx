@@ -16,7 +16,8 @@ type Props = { quote: string };
 
 const ShareSosmed = ({ quote }: Props) => {
   const pathname = usePathname();
-  const url = `${process.env.BASE_URL}${pathname}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}${pathname}`;
+  console.log({ process: process.env.NEXT_PUBLIC_BASE_URL });
 
   return (
     <div className="flex gap-2 items-center">
