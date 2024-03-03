@@ -51,6 +51,7 @@ const DetailInformasiPage = async ({ params }: Props) => {
     },
     include: {
       tags: true,
+      author: true,
     },
   });
 
@@ -143,6 +144,10 @@ const DetailInformasiPage = async ({ params }: Props) => {
               <ShareSosmed quote={article.title} />
             </div>
           </div>
+          <small className="text-gray-500">
+            author:{" "}
+            <span className="text-black font-bold">{article.author.name}</span>
+          </small>
           {/* title */}
           <h1 className="font-bold text-2xl md:text-3xl lg:text-4xl mb-6 leading-normal lg:leading-normal">
             {article?.title}
