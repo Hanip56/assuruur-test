@@ -25,6 +25,8 @@ import * as z from "zod";
 import { FormError } from "@/components/ui/form-error-alert";
 import { FormSuccess } from "@/components/ui/form-error-success";
 import { login } from "@/actions/auth";
+import Image from "next/image";
+import logo from "@/public/logo footer.png";
 
 const LoginPage = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -52,11 +54,20 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-[100%] h-screen flex items-center justify-center">
-      <Card className="w-96">
+    <div className="w-[100%] h-screen flex items-center justify-center bg-blueAssuruur">
+      <Card className="w-96 shadow-2xl">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Login to your app</CardDescription>
+          <CardTitle>
+            <div className="mx-auto w-40">
+              <Image
+                src={logo}
+                alt="Logo Assuruur"
+                className="w-full"
+                width={500}
+                height={500}
+              />
+            </div>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -96,8 +107,10 @@ const LoginPage = () => {
                   )}
                 />
               </div>
-              <div className="mt-6">
-                <Button disabled={isPending}>Submit</Button>
+              <div className="mt-6 flex justify-center">
+                <Button disabled={isPending} variant={"assuruur"}>
+                  Submit
+                </Button>
               </div>
             </form>
           </Form>

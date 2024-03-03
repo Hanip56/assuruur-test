@@ -7,7 +7,7 @@ const Sidebar = () => {
       {/* logo */}
       <div className="h-14 flex px-6 items-center text-lg font-semibold border-b">
         <CloudFog className="w-5 h-5 mr-2" />
-        <span>Clouthy</span>
+        <span>Assuruur Admin</span>
       </div>
       {/* main-nav */}
       <MainNav />

@@ -14,7 +14,7 @@ const Banner = ({ title, image }: Props) => {
         <Image
           src={
             image ??
-            "https://plus.unsplash.com/premium_photo-1683880731561-f0cceb0ad405?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            "https://utfs.io/f/8576e8f0-13e2-4084-8a77-3beae9bf988d-2zf.jpg"
           }
           alt="Hero-image"
           className="w-full h-full object-cover"
