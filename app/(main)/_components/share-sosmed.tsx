@@ -24,12 +24,7 @@ const ShareSosmed = ({ quote }: Props) => {
       <FacebookShareButton url={url} quote={quote}>
         <FacebookIcon size={24} round />
       </FacebookShareButton>
-      <WhatsappShareButton
-        url={url}
-        title={quote}
-        separator=":: "
-        blankTarget={true}
-      >
+      <WhatsappShareButton url={url} title={quote} separator=":: ">
         <WhatsappIcon size={24} round />
       </WhatsappShareButton>
       <TwitterShareButton url={url}>
