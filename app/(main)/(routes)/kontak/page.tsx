@@ -7,8 +7,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Kontak & Alamat",
+  description: "Kontak & Alamat Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Kontak & Alamat",
+  },
 };
-
 const KontakPage = () => {
   const Map = useMemo(
     () =>

@@ -69,7 +69,7 @@ const HomeClient = ({ latestInfo, lembagas, banner }: Props) => {
         buttonHref="/informasi?type=semua"
       >
         <div className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {latestInfoRow1?.map((info, i) => (
               <Link
                 href={`/informasi/${info?.slug}`}
@@ -93,7 +93,7 @@ const HomeClient = ({ latestInfo, lembagas, banner }: Props) => {
               </Link>
             ))}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {latestInfoRow2?.map((info, i) => (
               <Link
                 href={`/informasi/${info?.slug}`}

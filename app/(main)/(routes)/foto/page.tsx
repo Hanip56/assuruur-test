@@ -7,6 +7,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Foto",
+  description: "Foto-foto Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Foto",
+    description: "Foto-foto Pondok Pesantren Modern Assuruur",
+  },
 };
 
 const FotoPage = async ({

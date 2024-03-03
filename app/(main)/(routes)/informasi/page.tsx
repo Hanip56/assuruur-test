@@ -8,6 +8,11 @@ import PaginationCustom from "@/components/pagination-custom";
 
 export const metadata: Metadata = {
   title: "Informasi",
+  description: "Informasi-informasi Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Informasi",
+    description: "Informasi-informasi Pondok Pesantren Modern Assuruur",
+  },
 };
 
 const InformasiPage = async ({

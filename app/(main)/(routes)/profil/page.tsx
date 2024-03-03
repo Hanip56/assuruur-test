@@ -6,8 +6,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Profil",
+  description: "Profil Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Profil",
+    description: "Profil Pondok Pesantren Modern Assuruur",
+  },
 };
-
 const ProfilePage = async () => {
   const profil = await db.lembaga.findUnique({
     where: {

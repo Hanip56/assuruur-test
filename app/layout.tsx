@@ -9,14 +9,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Pondok Pesantren Assuruur",
-    default: "Pondok Pesantren Assuruur",
+    template: "%s | Pondok Pesantren Modern Assuruur",
+    default: "Pondok Pesantren Modern Assuruur",
   },
   description: "The official Assuruur website",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL!),
   openGraph: {
-    title: "Pondok Pesantren Assuruur",
-    siteName: "Pondok Pesantren Assuruur",
+    title: {
+      template: "%s | Pondok Pesantren Modern Assuruur",
+      default: "Pondok Pesantren Modern Assuruur",
+    },
+    description: "The official Pondok Pesantren Modern Assuruur website",
+    siteName: "Pondok Pesantren Modern Assuruur",
     type: "website",
     url: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
     images: [

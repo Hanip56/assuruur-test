@@ -7,8 +7,12 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Search",
+  description: "Pencarian artikel tentang Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Search",
+    description: "Pencarian artikel tentang Pondok Pesantren Modern Assuruur",
+  },
 };
-
 const SearchPage = async ({
   searchParams,
 }: {

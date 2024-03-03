@@ -1,4 +1,3 @@
-import React from "react";
 import Banner from "../../_components/banner";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +10,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Pendaftaran",
+  description: "Pendaftaran Pondok Pesantren Modern Assuruur",
+  openGraph: {
+    title: "Pendaftaran",
+  },
 };
 
 const PendaftaranPage = async () => {
@@ -48,27 +51,6 @@ const PendaftaranPage = async () => {
               Oleh <strong>Humas</strong>
             </p> */}
             </div>
-            {/* share */}
-            {/* <div className="flex items-center gap-2 text-gray-500">
-              <small>Bagikan:</small>
-              <div className="flex gap-1">
-                <button>
-                  <InstagramLogoIcon className="w-5 h-5" />
-                </button>
-                <button>
-                  <InstagramLogoIcon className="w-5 h-5" />
-                </button>
-                <button>
-                  <InstagramLogoIcon className="w-5 h-5" />
-                </button>
-                <button>
-                  <InstagramLogoIcon className="w-5 h-5" />
-                </button>
-                <button>
-                  <InstagramLogoIcon className="w-5 h-5" />
-                </button>
-              </div>
-            </div> */}
           </div>
 
           {/* thumbnail image */}

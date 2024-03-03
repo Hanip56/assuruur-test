@@ -15,7 +15,7 @@ export const baseInfo = {
   youtube: "https://www.youtube.com/c/AssuruurChannel",
   tiktok: "https://www.tiktok.com/@assuruur_ponpes",
   facebook: "https://www.facebook.com/assuruurponpes/",
-  description: "Pondok Pesantren Assuruur",
+  description: "Pondok Pesantren Modern Assuruur",
 };
 
 export const excludeArticles = [contentIds.sejarah, contentIds.pendaftaran];
