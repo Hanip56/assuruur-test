@@ -1,3 +1,5 @@
+import { BASE_IMAGE_URL } from "@/constants";
+import { db } from "@/lib/db";
 import Image from "next/image";
 
 type Props = {
@@ -5,22 +7,36 @@ type Props = {
   image?: string | null;
 };
 
-const Banner = ({ title, image }: Props) => {
+const Banner = async ({ title, image }: Props) => {
+  if (!image) {
+    const banner = await db.banner.findFirst({
+      where: {
+        at: "default",
+      },
+      include: {
+        images: true,
+      },
+    });
+
+    if (banner && banner?.images[0]?.key) {
+      image = BASE_IMAGE_URL + "/" + banner?.images[0]?.key;
+    }
+  }
+
   return (
     <section className="relative h-72 sm:h-80 md:h-96 overflow-x-hidden w-[100%]">
-      <div className="-z-10 absolute w-full h-full">
+      <div className="-z-10 absolute w-full h-full bg-blueAssuruur">
         <div className="absolute top-0 left-0 inset-0 bg-black opacity-50" />
 
-        <Image
-          src={
-            image ??
-            "https://utfs.io/f/8576e8f0-13e2-4084-8a77-3beae9bf988d-2zf.jpg"
-          }
-          alt="Hero-image"
-          className="w-full h-full object-cover"
-          width={2000}
-          height={2000}
-        ></Image>
+        {image && (
+          <Image
+            src={image}
+            alt="Hero-image"
+            className="w-full h-full object-cover"
+            width={2000}
+            height={2000}
+          ></Image>
+        )}
       </div>
 
       {/* content */}

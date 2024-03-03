@@ -3,6 +3,31 @@ import { db } from "@/lib/db";
 import { utapi } from "@/lib/upload-thing-server";
 import { NextResponse } from "next/server";
 
+export async function GET(
+  req: Request,
+  { params }: { params: { bannerId: string } }
+) {
+  try {
+    const bannerExist = await db.banner.findUnique({
+      where: {
+        id: params.bannerId,
+      },
+      include: {
+        images: true,
+      },
+    });
+
+    if (!bannerExist) {
+      return new NextResponse("Banner not found", { status: 404 });
+    }
+
+    return NextResponse.json(bannerExist);
+  } catch (error) {
+    console.log("[BANNER_ID_GET]", error);
+    return new NextResponse("Internal error", { status: 500 });
+  }
+}
+
 // update without new image
 export async function PATCH(
   req: Request,
@@ -69,7 +94,7 @@ export async function PATCH(
 
     return NextResponse.json("updated");
   } catch (error) {
-    console.log("[PRODUCT_ID_PATCH]", error);
+    console.log("[BANNER_ID_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
@@ -134,7 +159,7 @@ export async function PUT(
 
     return NextResponse.json("updated");
   } catch (error) {
-    console.log("[PRODUCT_ID_PUT]", error);
+    console.log("[BANNER_ID_PUT]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }

@@ -25,6 +25,11 @@ const fixContents = [
     description: "Manage your pendaftaran",
     href: "/dashboard/pendaftaran",
   },
+  {
+    name: "Banner",
+    description: "Manage your default banner",
+    href: "/dashboard/banner",
+  },
 ];
 
 const DashboardPage = async () => {
