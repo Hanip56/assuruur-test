@@ -33,6 +33,7 @@ const ClientForm = ({ initialData }: Props) => {
     resolver: zodResolver(categorySchema),
     defaultValues: {
       name: initialData?.name ?? "",
+      description: initialData?.description ?? "",
     },
   });
 

@@ -17,11 +17,13 @@ const ArticlePage = async () => {
     },
     include: {
       category: true,
+      author: true,
     },
   });
 
   const formattedArticles = articles.map((article) => ({
     id: article.id,
+    author: article.author.name ?? "",
     title: article.title,
     category: article.category.name,
   }));
