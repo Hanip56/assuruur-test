@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import Sidebar from "./_components/sidebar";
 import Topbar from "./_components/topbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -12,13 +13,11 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
+  if (!session || !session.user) return redirect("/");
+
   return (
-    // <ThemeProvider
-    //   attribute="class"
-    //   defaultTheme="system"
-    //   enableSystem
-    //   disableTransitionOnChange
-    // >
     <div className="flex">
       <Topbar />
       <div className="hidden h-screen md:block w-60 flex-shrink-0">
@@ -28,6 +27,5 @@ export default async function DashboardLayout({
       </div>
       <main className="w-full h-full pt-14">{children}</main>
     </div>
-    // </ThemeProvider>
   );
 }
