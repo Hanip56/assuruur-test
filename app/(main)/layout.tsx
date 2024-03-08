@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { AOSInit } from "@/components/aos-init";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
+import { Suspense } from "react";
 
 export default async function MainLayout({
   children,
@@ -14,8 +15,10 @@ export default async function MainLayout({
       <AOSInit />
       {/* navbar */}
       <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <Suspense>
+        <main>{children}</main>
+        <Footer />
+      </Suspense>
     </>
   );
 }

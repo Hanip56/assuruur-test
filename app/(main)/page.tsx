@@ -1,13 +1,17 @@
 import { db } from "@/lib/db";
-import HomeClient from "./_components/home-client";
 import { Metadata } from "next";
+import Hero from "./_components/hero";
+import { Suspense } from "react";
+import LatestInfo from "./_components/latest-info";
+import Loading from "./_components/loading";
+import Lembagas from "./_components/lembagas";
 
 export const metadata: Metadata = {
   title: "Beranda",
 };
 
-const HomePage = async () => {
-  const banner = await db.banner.findFirst({
+async function getBanner() {
+  return await db.banner.findFirst({
     where: {
       at: "beranda",
     },
@@ -15,25 +19,21 @@ const HomePage = async () => {
       images: true,
     },
   });
+}
 
-  const latestInfo = await db.article.findMany({
-    where: {
-      isSplit: false,
-    },
-    take: 6,
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  const lembagas = await db.lembaga.findMany({
-    where: {
-      isSplit: false,
-    },
-  });
+const HomePage = async () => {
+  const banner = await getBanner();
 
   return (
-    <HomeClient latestInfo={latestInfo} lembagas={lembagas} banner={banner} />
+    <>
+      <Hero banner={banner} />
+      <Suspense fallback={<Loading />}>
+        <LatestInfo />
+        <Suspense>
+          <Lembagas />
+        </Suspense>
+      </Suspense>
+    </>
   );
 };
 
