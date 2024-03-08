@@ -1,6 +1,7 @@
 import { BASE_IMAGE_URL } from "@/constants";
 import { db } from "@/lib/db";
 import Image from "next/image";
+import { Suspense } from "react";
 
 type Props = {
   title: string;
@@ -25,18 +26,23 @@ const Banner = async ({ title, image }: Props) => {
 
   return (
     <section className="relative h-72 sm:h-80 md:h-96 overflow-x-hidden w-[100%]">
-      <div className="-z-10 absolute w-full h-full bg-blueAssuruur">
-        <div className="absolute top-0 left-0 inset-0 bg-black opacity-50" />
-
-        {image && (
-          <Image
-            src={image}
-            alt="Hero-image"
-            className="w-full h-full object-cover"
-            width={2000}
-            height={2000}
-          ></Image>
-        )}
+      <div className="-z-10 absolute w-full h-full">
+        <Suspense
+          fallback={
+            <div className="absolute top-0 left-0 inset-0 bg-gray-300" />
+          }
+        >
+          <div className="absolute top-0 left-0 inset-0 bg-black opacity-50" />
+          {image && (
+            <Image
+              src={image}
+              alt="Hero-image"
+              className="w-full h-full object-cover"
+              width={2000}
+              height={2000}
+            ></Image>
+          )}
+        </Suspense>
       </div>
 
       {/* content */}

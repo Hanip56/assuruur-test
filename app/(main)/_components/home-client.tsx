@@ -37,22 +37,19 @@ const HomeClient = ({ latestInfo, lembagas, banner }: Props) => {
 
         {/* content */}
         <div
-          className="max-w-7xl h-full mx-auto flex items-end text-white px-4 py-16"
+          className="max-w-7xl h-full mx-auto flex items-end text-white px-4 py-10 sm:py-16"
           data-aos="fade-left"
         >
           <div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold  leading-normal sm:leading-normal md:leading-normal lg:leading-normal mb-4 max-w-3xl">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold  leading-10 sm:leading-normal md:leading-normal lg:leading-normal mb-4 max-w-3xl">
               {`${banner?.title}` ?? (
                 <>
                   Pondok <br /> Pesantren Assuruur
                 </>
               )}
             </h1>
-            <p className="max-w-2xl">
-              {banner?.description ??
-                `Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet
-              delectus praesentium quod ullam, officia labore harum neque porro
-              qui nobis.`}
+            <p className="max-w-2xl text-sm sm:text-base">
+              {banner?.description ?? ``}
             </p>
             <Link href={"/profil"}>
               <Button variant={"assuruur"} className="mt-6 bg-sky-900">
