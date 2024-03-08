@@ -1,7 +1,6 @@
 "use client";
 
 import Section from "@/components/section";
-import { useEffect, useState } from "react";
 import { Lembaga, Misi } from "@prisma/client";
 import TiptapContent from "@/components/tiptap-content";
 
@@ -14,14 +13,6 @@ type Props = {
 };
 
 const ProfilClient = ({ profil }: Props) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
-
   return (
     <div className="w-[100%]">
       {/* main */}
